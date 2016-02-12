@@ -1,17 +1,26 @@
 <!doctype html>
-<html>
+<html ng-app="leuzin">
 	<head>
+		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
-		<script src="assets/bower_components/angular/angular.min.js"></script>
-	</head>
-
-	<body class="container">
-			<h1>test</h1>
-	</body>
+		<script type="text/javascript" src="assets/bower_components/angular/angular.min.js"></script>
 
 	<!-- Other scripts -->
-	<script type="text/javascript" ></script
+		<script type="text/javascript" src="app/app.js"></script>	
+		<script type="text/javascript" src="app/components/core/appController.js"></script>
+	
+	<!-- Load the rest of the app- ->
+	<script type="text/javascript" src="assets/vendor/require.min.js" data-main="app/includes.js"></script>
+	<!-- End other scripts -->
+	</head>
 
+	<body class="container" ng-controller="AppController as appCtrl">
+		{{appCtrl.greeting}}
+		<!-- Add navigation? -->
+
+		<div class="panel" leuzinSubApp></div>
+
+	</body>
 </html>
