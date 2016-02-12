@@ -1,4 +1,5 @@
+angular.module("leuzin")
 
-angular.module("leuzin").controller("AppController", function () {
+.controller("AppController", function () {
 	this.greeting = "Controller active!";
 });

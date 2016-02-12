@@ -10,6 +10,8 @@
 	<!-- Other scripts -->
 		<script type="text/javascript" src="app/app.js"></script>	
 		<script type="text/javascript" src="app/components/core/appController.js"></script>
+		<script type="text/javascript" src="app/components/core/subAppDirective.js"></script>
+
 	
 	<!-- Load the rest of the app- ->
 	<script type="text/javascript" src="assets/vendor/require.min.js" data-main="app/includes.js"></script>
@@ -20,7 +22,7 @@
 		{{appCtrl.greeting}}
 		<!-- Add navigation? -->
 
-		<div class="panel" leuzinSubApp></div>
+		<div class="panel" x-sub-app></div>
 
 	</body>
 </html>
