@@ -1,28 +1,47 @@
 <!doctype html>
 <html ng-app="leuzin">
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
-		<script type="text/javascript" src="assets/bower_components/angular/angular.min.js"></script>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title ng-bind="'leuzin &mdash; ' + title">app</title>
+		 <link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/bower_components/bootstrap/themes/sandstone/bootstrap.min.css" />
+	<script type="text/javascript">
+		document.write('<base href="' + document.location + '" />');
+    </script>
+	<script type="text/javascript" src="assets/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="assets/bower_components/angular-route/angular-route.min.js"></script>
+
 
 	<!-- Other scripts -->
-		<script type="text/javascript" src="app/app.js"></script>	
-		<script type="text/javascript" src="app/components/core/appController.js"></script>
-		<script type="text/javascript" src="app/components/core/subAppDirective.js"></script>
-
+	<script type="text/javascript" src="app/app.js"></script>	
+	<script type="text/javascript" src="app/components/core/appController.js"></script>
+	<!-- <script type="text/javascript" src="app/components/core/coreServices.js"></script> -->
+	<script type="text/javascript" src="app/components/core/coreDirectives.js"></script>
+	
 	
 	<!-- Load the rest of the app- ->
 	<script type="text/javascript" src="assets/vendor/require.min.js" data-main="app/includes.js"></script>
 	<!-- End other scripts -->
-	</head>
+</head>
+<body class="container-full-width" ng-controller="AppController as appCtrl">
+	<noscript>
+		<br /><br />
+		<div class="alert alert-danger" role="alert">Javascript is required to access the Neurral system.</div>
+	</noscript>
 
-	<body class="container" ng-controller="AppController as appCtrl">
-		{{appCtrl.greeting}}
-		<!-- Add navigation? -->
+	<ng-include src="'app/components/core/views/navbar.html'"></ng-include>
+	<!-- <sub-nav></sub-nav> -->
+	<!-- Add navigation? per app na? -->
+	
+	<div class="panel" ng-view></div>
 
-		<div class="panel" x-sub-app></div>
-
-	</body>
+<footer class="navbar navbar-fixed-bottom navbar-default">
+	<span style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</span>
+</footer>
+</body>
 </html>
