@@ -1,24 +1,21 @@
 // var app = angular.module("leuzin")
 
-app.controller("AppController", function () {
-	this.greeting = "Controller active!";
+app.controller("AppController", function (CoreServices,Session) {
+	CoreServices.say();
+	Session.get().then(function(response){
+		console.log(JSON.stringify(response.data));
+	});
+	
+})
 
-	/*if Session not logged in
-		show login app
+.controller("IndexController", function () {
 
-	if logged in
-		show index app (default/home/menu, etc)
+})
 
+.controller('LoginController', function () {
 
-	*/
-});
+})
 
-app.controller("HomeController", function () {
-
-
-});
-
-app.controller("LoginController", function () {
-
+.controller('HomeController', function() {
 
 });

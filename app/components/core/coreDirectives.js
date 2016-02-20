@@ -15,12 +15,3 @@ var app = angular	.module('leuzin');
 // 		//templateUrl: "app/components/core/login.html"
 //   	};
 // });
-
-app.directive("subNav", function () {
-	console.log="attempting subNav";
-	return {
-		restrict: 'AE',
-		replace: 'true',
-		templateUrl: "app/components/core/navView.html"
-  	};
-});
