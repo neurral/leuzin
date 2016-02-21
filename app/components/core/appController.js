@@ -1,21 +1,23 @@
 // var app = angular.module("leuzin")
 
-app.controller("AppController", function (CoreServices,Session) {
-	CoreServices.say();
-	Session.get().then(function(response){
-		console.log(JSON.stringify(response.data));
-	});
-	
-})
+app.controller("AppController", function (CoreServices,AUTH_EVENTS,sessionData) {
+	var self = this;
+	// // CoreServices.say();
+	// Session.get().then(function(res){
+	// 	self.session = res.data;
+	// 	// console.log(JSON.stringify(res.data));
+	// });
+	console.log("trying appctrller");
+	self.session = sessionData.data;
+	console.log(JSON.stringify(sessionData.data));
+	console.log("status: "+self.session.status);	
+});
 
-.controller("IndexController", function () {
 
-})
+app.controller('LoginController', function () {
 
-.controller('LoginController', function () {
+});
 
-})
-
-.controller('HomeController', function() {
+app.controller('HomeController', function() {
 
 });

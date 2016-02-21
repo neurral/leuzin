@@ -10,3 +10,9 @@ app.factory('Session', function($http) {
   Session.updateSession();
   return Session; 
 });
+
+app.service("restService", function(Restangular) {
+  this.getUsers = function() {
+    return Restangular.all("users").getList();
+  }
+});
