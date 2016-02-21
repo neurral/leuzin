@@ -35,7 +35,19 @@
 	<noscript><br /><br /><div class="alert alert-danger" role="alert">Javascript is required to access the Neurral system.</div></noscript>
 	<ng-include src="'app/components/core/views/navbar.html'"></ng-include>
 
-	<ng-view></ng-view>
+<div class="row">
+	<!--Sidebar -->
+	<div class="col-md-2">
+		<sidebar></sidebar>
+	</div>
+	<!-- End Sidebar-->
+
+	<!-- Main View Panel-->
+	<div class="col-md-10">
+		<ng-view></ng-view>
+	</div>	
+	<!-- End Main View Panel-->
+</div>
 
 	<footer class="navbar navbar-fixed-bottom navbar-default">
 		<sub style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</sub>

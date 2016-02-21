@@ -15,3 +15,12 @@ var app = angular	.module('leuzin');
 // 		//templateUrl: "app/components/core/login.html"
 //   	};
 // });
+
+app.directive("sidebar", function(){
+	return {
+		restrict: 'AE',
+		replace: 'true',
+		// template: function(sideBarFactory){}, //TODO create a factory to create a app-dependent sidebar
+		templateUrl:"app/components/core/views/sidebar.html"
+	};
+})

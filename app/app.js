@@ -48,12 +48,16 @@ app.config(
             title: 'Home',
             templateUrl: 'app/components/core/views/login.html'
         });
+        $routeProvider.when('/app/dashboard', {
+            title: 'Dashboard',
+            templateUrl: 'app/components/dashboard/views/dashboard.html',
+        });
         // $routeProvider.when('/Product/:id', {
         //     title: 'Product',
         //     templateUrl: '/Assets/Views/Product.html',
         //     controller: 'ProductController'
         // });
-        $routeProvider.otherwise({templateUrl:'app/components/core/views/404.html'});
+        $routeProvider.otherwise({title:'404',templateUrl:'app/components/core/views/404.html'});
     }]);
 
 app.run(['$rootScope', function($rootScope) {
