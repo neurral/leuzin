@@ -16,9 +16,9 @@
     <link rel="manifest" href="manifest.json">
 
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Web Starter Kit">
-    <link rel="icon" sizes="192x192" href="assets/images/touch/chrome-touch-icon-192x192.png">
+    <!-- <meta name="mobile-web-app-capable" content="yes"> -->
+    <!-- <meta name="application-name" content="Web Starter Kit"> -->
+    <!-- <link rel="icon" sizes="192x192" href="assets/images/touch/chrome-touch-icon-192x192.png"> -->
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -39,18 +39,22 @@
 
 	<!-- <script type="text/javascript" src="assets/js/jquery.min.js"></script> -->
 	<script type="text/javascript" src="assets/js/angular.min.js"></script>
-	
+	<script type="text/javascript" src="assets/js/angular-route.min.js"></script>
 
 	<!-- Other scripts -->
-	<script type="text/javascript" src="app/app.js"></script>	
+	<script type="text/javascript" src="app/app.js"></script>		
 	<script type="text/javascript" src="app/components/core/coreServices.js"></script>
-	<!-- <script type="text/javascript" src="app/components/core/coreDirectives.js"></script> -->
+	<script type="text/javascript" src="app/components/core/coreDirectives.js"></script>
 	<script type="text/javascript" src="app/components/core/appController.js"></script>
 </head>
 <body class="container-full-width">
 	<noscript><br /><br /><div class="alert alert-danger" role="alert">Javascript is required to access the Neurral system</div></noscript>
-	<div ng-controller="AppController as appctrl">
-		
+	<navigation></navigation>
+
+	<div ng-controller="AppController as appctrl" class="container">
+	{{session}}
+		<div ng-view></div>
+	
 	</div>
 
 	<footer class="navbar navbar-fixed-bottom navbar-default">

@@ -12,13 +12,14 @@ app.service('CoreServices', function () {
 app.service("SessionLoader", ['$rootScope', 'Session', function($rootScope, Session) {     
 	this.reload = function() {
 		Session.then(function(response){
-    		console.log(JSON.stringify(response.data));
+    		// console.log(JSON.stringify(response.data));
         	$rootScope.session = response.data.session;
     	},
-    	function(response){
-    		console.log(JSON.stringify(response.data));
-        	$rootScope.session = response.statusText;	
+    	function(response){ //error
+    		//console.log(JSON.stringify(response.data));
+        	$rootScope.session = {};
     	});
+        console.log($rootScope.session);
         return $rootScope.session;
 	},
     this.session = function(){
@@ -33,21 +34,5 @@ app.service("SessionLoader", ['$rootScope', 'Session', function($rootScope, Sess
         method: "POST",
         data : $rootScope.session
     });
-    // .then(function(response) {
-    //         // success
-    //         return response.data
-    // }
-    // , 
-    // function(response) { // optional
-    //         // failed
-    //         console.log("failed");
-    // });
+    //Session is then-able, used in SessionLoader service
 }]); 
-
-// app.factory('Session', function($http) {
-// 	return {
-// 		get:  function(){
-// 	        return $http.get('mock/session.json'); // this will return a promise to controller
-//     	}
-//     }
-// });
