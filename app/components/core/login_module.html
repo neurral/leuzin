@@ -1,0 +1,14 @@
+<form name="loginForm" ng-submit="loginCtrl.login(loginCtrl.user)" novalidate>
+	<label for="username">Username:</label>
+	<input type="text" id="username" ng-model="loginCtrl.user.username">
+
+	<br />
+	<label for="password">Password:</label>
+	<input type="password" id="password" ng-model="loginCtrl.user.password">
+	<br />
+	{{loginCtrl.user}}
+	<br />
+	<button type="submit">Login</button>
+
+	{{ $scope.session }}
+</form>

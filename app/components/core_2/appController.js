@@ -1,26 +1,4 @@
 // var app = angular.module("leuzin")
-
-angular.module('sessionModule', [])
-  .directive('sessionDirective', function() {
-    return {
-      scope: {
-      	session : {}; //replace this with retrieval frim localstorage?
-      },
-      templateUrl: 'session_.html',
-      replace: true,
-      controller: 'SessionController',
-      controllerAs: 'sessionCtrl'
-    };
-  })
-  .controller('SessionController', function() {
-    this.session = [
-      {firstName: 'Rachel', lastName: 'Washington'},
-      {firstName: 'Joshua', lastName: 'Foster'},
-      {firstName: 'Samuel', lastName: 'Walker'},
-      {firstName: 'Phyllis', lastName: 'Reynolds'}
-    ];
-  });
-
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
