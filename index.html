@@ -7,7 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-
+	
+	<!-- Used for HTML5 prevention of # urls. IE9 Compatibility -->
+	<!-- <base href="/"> -->
 
 	<!-- Disable tap highlight on IE -->
 	<!-- <meta name="msapplication-tap-highlight" content="no"> -->
@@ -49,7 +51,7 @@
 <script type="text/javascript" src="app/app.js"></script>	
 <script type="text/javascript" src="app/components/core/core_controllers.js"></script>
 </head>
-<body>
+<body ng-controller="AppCtrl as app">
 	<div class="container-full-width">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
@@ -59,30 +61,35 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/index">neurral \\\ <b>leuzin</b></a>
+					<a class="navbar-brand" href="/" ui-sref="dashboard">neurral \\\ <b>leuzin</b></a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-<!-- 					<li><a href="#">Page 1</a></li>
-					<li><a href="#">Page 2</a></li>
-					<li><a href="#">Page 3</a></li> -->
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#" ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li><a href="#" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-				</ul>
+						<!-- <li><a href="#/">Home</a></li> -->
+						<!-- <li><a href="#">Page 1</a></li> -->
+						<!-- <li><a href="#">Page 2</a></li> -->
+						<!-- <li><a href="#">Page 3</a></li> -->
+					</ul>
+					<!-- Menu when not logged in -->
+					<ul class="nav navbar-nav navbar-right" id="outside-menu" ng-if="!session.isAuthenticated">
+						<li><a href="#" ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li><a href="#" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					</ul>
+					<!-- Menu when logged in -->
+					<ul class="nav navbar-nav navbar-right" id="outside-menu" ng-if="session.isAuthenticated">
+						<li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-	<div class="container">
-		<noscript><br /><br /><div class="alert alert-danger" role="alert">Javascript is required to access the Neurral system</div></noscript>
-	<ui-view></ui-view>
+		<div class="container">
+			<noscript><br /><br /><div class="alert alert-danger" role="alert">Javascript is required to access the Neurral system</div></noscript>
+			<ui-view></ui-view>
+		</div>
+		<footer class="navbar navbar-fixed-bottom navbar-default">
+			<sub style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</sub>
+		</footer>
 	</div>
-	<footer class="navbar navbar-fixed-bottom navbar-default">
-		<sub style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</sub>
-	</footer>
-</div>
 </body>
 </html>

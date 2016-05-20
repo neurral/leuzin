@@ -17,6 +17,8 @@ angular.module('authModule',[])
     if (session) {
       useCredentials(session);
     }
+    else session = {};
+    return session;
   }
  
   function storeUserCredentials(session) {
@@ -87,7 +89,8 @@ angular.module('authModule',[])
     login: login,
     register: register,
     logout: logout,
-    isAuthenticated: function() {return isAuthenticated;}
+    isAuthenticated: function() {return isAuthenticated;},
+    sessionInfo: function() {return loadUserCredentials();} 
   };
 }])
  
@@ -104,7 +107,5 @@ angular.module('authModule',[])
  
 .config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
-})
-
-;
+});
 

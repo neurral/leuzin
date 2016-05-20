@@ -20,37 +20,54 @@
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
-      $stateProvider
-      .state('index', {
-        url: '/',
-        abstract: true,
-        templateUrl: 'app/components/core/views/home.html'
-    })
-      .state('login', {
-        url: '/login',
-        templateUrl: 'app/components/core/login_module.html',
-        controller: 'LoginCtrl'
-    })
-      .state('register', {
-        url: '/register',
-        templateUrl: 'app/components/core/register_module.html',
-        controller: 'RegisterCtrl'
-    })
-      .state('dashboard', {
-        url: '/dashboard',
-        templateUrl: 'app/components/core/dash_module.html',
-        controller: 'DashboardCtrl'
-    });
+        // $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode({
+        //   enabled: true,
+        //   requireBase: false
+        // });
+        // $urlRouterProvider.when('', '/');
+        //otherwise report 404
+        // $urlRouterProvider.otherwise('/404');
 
-      $urlRouterProvider.otherwise('/index');
-  })
+        // $urlRouterProvider.when('', '/');
+        // otherwise report 404
+        // 
+
+        $stateProvider
+        .state('index', {
+            url: 'index',
+            // abstract: true,
+            templateUrl: 'app/components/core/views/home.html'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'app/components/core/login_module.html',
+            controller: 'LoginCtrl'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'app/components/core/register_module.html',
+            controller: 'RegisterCtrl'
+        })
+        .state('dashboard', {
+            url: '/dashboard',
+            templateUrl: 'app/components/core/dash_module.html',
+            controller: 'DashboardCtrl'
+        });
+        // .state('404', {
+        //     url: '{path:.*}',
+        //     templateUrl: 'app/components/core/views/404.html',
+        // });
+        $urlRouterProvider.otherwise('/login');
+
+})
 
 
 .run(function ($rootScope, $state, AuthService, $http) {
-
     // console.log($state.get());
         $http.defaults.headers.common['Content-Type'] = 'application/json';
         $http.defaults.headers.common['Accept'] = 'application/json';
+
         $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
             if (!AuthService.isAuthenticated()) {
               console.log(next.name);
