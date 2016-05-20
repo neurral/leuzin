@@ -1,12 +1,12 @@
-<form name="loginForm" ng-submit="loginCtrl.login(loginCtrl.user)" novalidate>
+<form name="loginForm" ng-submit="login(user)" novalidate>
 	<label for="username">Username:</label>
-	<input type="text" id="username" ng-model="loginCtrl.user.username">
+	<input type="text" id="username" ng-model="user.username">
 
 	<br />
 	<label for="password">Password:</label>
-	<input type="password" id="password" ng-model="loginCtrl.user.password">
+	<input type="password" id="password" ng-model="user.password">
 	<br />
-	{{loginCtrl.user}}
+	{{user}}
 	<br />
 	<button type="submit">Login</button>
 

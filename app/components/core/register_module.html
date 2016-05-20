@@ -1,0 +1,16 @@
+<form name="registerForm" ng-submit="register.register(reg)" novalidate>
+	<label for="username">Username:</label>
+	<input type="text" id="username" ng-model="regCtrl.user.username">
+
+	<br />
+	<label for="password">Password:</label>
+	<input type="password" id="password" ng-model="regCtrl.user.password">
+	<br />
+	
+	<br />
+	<button type="submit">Register</button>
+	
+
+	{{regCtrl.user}}
+	<!-- TODO add more registraion fields -->
+</form>

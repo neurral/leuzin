@@ -1,0 +1,12 @@
+a {
+	cursor: hand;
+	transition: all ease 0.3s;
+}
+
+
+/* button effect for links*/
+a:active {
+	position: absolute;
+	top: 1px;
+	outline: 0px;
+}
