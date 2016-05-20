@@ -12,14 +12,17 @@
     'authModule'
     ])
 
-    .constant('AUTH_STATUSES',{
-        notAuthenticated: 'auth-not-authenticated'
+    .constant('AUTH_EVENTS', {
+      notAuthenticated: 'auth-not-authenticated'
     })
-    .constant('API_ENDPOINT',{
-        url : 'http://localhost:3000'
+    .constant('API_ENDPOINT', {
+      url: 'https://neurral-nacc-0.herokuapp.com'
     })
+    //  For a simulator use: url: 'http://127.0.0.1:8080/api'
+    // url: 'https://neurral-nacc-0.herokuapp.com/'
+    // url: 'http://localhost:3000'
 
-    .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider) {
         // $locationProvider.html5Mode(true);
         // $locationProvider.html5Mode({
         //   enabled: true,
@@ -62,24 +65,24 @@
         //everything else, 404
         $urlRouterProvider.otherwise('/404');
 
-})
+    })
 
 
-.run(function ($rootScope, $state, AuthService, $http) {
+  .run(function ($rootScope, $state, AuthService, $http) {
     // console.log(JSON.stringify($state.get()));
-        $http.defaults.headers.common['Content-Type'] = 'application/json';
-        $http.defaults.headers.common['Accept'] = 'application/json';
+    $http.defaults.headers.common['Content-Type'] = 'application/json';
+    $http.defaults.headers.common['Accept'] = 'application/json';
 
-        $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
-            console.log(next.name);
-            if (!AuthService.isAuthenticated()) {
-              if (next.name !== 'login' && next.name !== 'register') {
-                event.preventDefault();
-                $state.go('login');
-              }
-            }
-            else {
-                if (next.name === 'login' || next.name === 'register') {
+    $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+        console.log(next.name);
+        if (!AuthService.isAuthenticated()) {
+          if (next.name !== 'login' && next.name !== 'register') {
+            event.preventDefault();
+            $state.go('login');
+        }
+    }
+    else {
+        if (next.name === 'login' || next.name === 'register') {
                     event.preventDefault(); //do not allow login or register if already logged in
                 }
             }

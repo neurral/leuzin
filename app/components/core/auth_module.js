@@ -1,10 +1,11 @@
 angular.module('authModule',[])
-.constant('AUTH_EVENTS', {
-  notAuthenticated: 'auth-not-authenticated'
-})
-.constant('API_ENDPOINT', {
-  url: 'https://neurral-nacc-0.herokuapp.com'
-})
+/* THESE ARE RELOCATED IN app.js */
+// .constant('AUTH_EVENTS', {
+//   notAuthenticated: 'auth-not-authenticated'
+// })
+// .constant('API_ENDPOINT', {
+//   url: 'https://neurral-nacc-0.herokuapp.com'
+// })
   //  For a simulator use: url: 'http://127.0.0.1:8080/api'
   // url: 'https://neurral-nacc-0.herokuapp.com/'
   // url: 'http://localhost:3000'
