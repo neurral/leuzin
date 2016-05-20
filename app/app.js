@@ -22,7 +22,7 @@
     .config(function($stateProvider, $urlRouterProvider) {
       $stateProvider
       .state('index', {
-        url: '/index',
+        url: '/',
         abstract: true,
         templateUrl: 'app/components/core/views/home.html'
     })
