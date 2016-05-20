@@ -3,11 +3,11 @@ angular.module('authModule',[])
   notAuthenticated: 'auth-not-authenticated'
 })
 .constant('API_ENDPOINT', {
-  url: 'http://localhost:3000'
+  url: 'https://neurral-nacc-0.herokuapp.com'
+})
   //  For a simulator use: url: 'http://127.0.0.1:8080/api'
   // url: 'https://neurral-nacc-0.herokuapp.com/'
-})
-
+  // url: 'http://localhost:3000'
 
 .service("AuthService",["$q", "$http", "API_ENDPOINT", function($q, $http, API_ENDPOINT){
   var SESSION = 'local_session';  //should we use the token key or..this 'lcoal_session' will cause one session per browser only
