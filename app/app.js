@@ -80,7 +80,7 @@
             }
             else {
                 if (next.name === 'login' || next.name === 'register') {
-                    event.preventDefault();
+                    event.preventDefault(); //do not allow login or register if already logged in
                 }
             }
         });

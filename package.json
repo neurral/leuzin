@@ -1,0 +1,13 @@
+{
+  "name": "leuzin",
+  "private": true,
+  "version": "0.0.1",
+  "description": "an Angularjs application",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/neurral/leuzin.git"
+  },
+  "author": "john20xdoe",
+  "license": ""
+}
