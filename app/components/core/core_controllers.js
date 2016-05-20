@@ -48,7 +48,8 @@ angular.module('leuzin')
       $scope.memberinfo = result.data.msg;
     });
   };
- 
+  
+  $scope.syncSession();
   // $scope.logout = function() {
   //   AuthService.logout();
   //   $state.go('login');

@@ -25,9 +25,6 @@
         //   enabled: true,
         //   requireBase: false
         // });
-        // $urlRouterProvider.when('', '/');
-        //otherwise report 404
-        // $urlRouterProvider.otherwise('/404');
 
         // $urlRouterProvider.when('', '/');
         // otherwise report 404
@@ -53,28 +50,38 @@
             url: '/dashboard',
             templateUrl: 'app/components/core/dash_module.html',
             controller: 'DashboardCtrl'
-        });
-        // .state('404', {
-        //     url: '{path:.*}',
-        //     templateUrl: 'app/components/core/views/404.html',
-        // });
-        $urlRouterProvider.otherwise('/login');
+        })
+        .state('404', {
+            url: '/404',
+            templateUrl: 'app/components/core/views/404.html',
+        }); 
+
+        //when no states the href, go to dashboard. isAuthenticated will be checked in $stateChangeStart
+        //and will redirect to login if not logged in.
+        $urlRouterProvider.when('', '/dashboard');
+        //everything else, 404
+        $urlRouterProvider.otherwise('/404');
 
 })
 
 
 .run(function ($rootScope, $state, AuthService, $http) {
-    // console.log($state.get());
+    // console.log(JSON.stringify($state.get()));
         $http.defaults.headers.common['Content-Type'] = 'application/json';
         $http.defaults.headers.common['Accept'] = 'application/json';
 
         $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+            console.log(next.name);
             if (!AuthService.isAuthenticated()) {
-              console.log(next.name);
               if (next.name !== 'login' && next.name !== 'register') {
                 event.preventDefault();
                 $state.go('login');
               }
+            }
+            else {
+                if (next.name === 'login' || next.name === 'register') {
+                    event.preventDefault();
+                }
             }
         });
 });
