@@ -84,6 +84,7 @@ angular.module('authModule',[])
   };
  
   var logout = function() {
+    // TODO : add ajax call for session delete in API
     destroyUserCredentials();
   };
  
