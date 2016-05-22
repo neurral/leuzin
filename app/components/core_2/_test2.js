@@ -1,1 +1,0 @@
-alert("_test2 file !");
