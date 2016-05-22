@@ -19,7 +19,9 @@ a:active:not(.navbar-brand) {
 	outline: 0px;
 }
 
+/*fix hidden content below fixed nav*/
 .container {
+	 padding-bottom: 70px;
 	padding-right:10px; 
 	padding-left:10px;
 }

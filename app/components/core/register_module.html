@@ -3,85 +3,93 @@
 		<h3>REGISTER ACCOUNT</h3>
 	</div>
 	<div class="panel-body">
-	<form  accept-charset="UTF-8" class="form" role="form" name="registerForm" ng-submit="register(user)" validate>
+		<form  accept-charset="UTF-8" class="form" role="form" name="registerForm" ng-submit="register(user)" validate>
 
- 		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">First Name</span>
-				<input type="text" class="form-control" id="first_name" placeholder="" ng-model="user.first_name" required>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">First Name</span>
+					<input type="text" class="form-control" id="first_name" placeholder="" ng-model="user.first_name" required>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Middle Name</span>
-				<input type="text" class="form-control" id="mid_name" placeholder="" ng-model="user.mid_name">
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Middle Name</span>
+					<input type="text" class="form-control" id="mid_name" placeholder="" ng-model="user.mid_name">
+				</div>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Last Name</span>
-				<input type="text" class="form-control" id="last_name" placeholder="" ng-model="user.last_name" required>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Last Name</span>
+					<input type="text" class="form-control" id="last_name" placeholder="" ng-model="user.last_name" required>
+				</div>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Gender </span>
-				<select class="form-control" id="gender" ng-model="user.gender" required>
-					<option value="0">Prefer not to say</option>
-					<option value="1" selected>Male</option>
-					<option value="2">Female</option>
-					<option value="3">Not Sure</option>
-				</select>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Gender </span>
+					<select class="form-control" id="gender" ng-model="user.gender" required>
+						<option value="0">Prefer not to say</option>
+						<option value="1" selected>Male</option>
+						<option value="2">Female</option>
+						<option value="3">Not Sure</option>
+					</select>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Birthday</span>
-				<input type="date" class="form-control" id="birthday" placeholder="YYYY-MM-DD" ng-model="user.birthday" required>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Birthday</span>
+					<input type="date" class="form-control" id="birthday" placeholder="YYYY-MM-DD" ng-model="user.birthday" required uib-datepicker-popup is-open="birthdayCal.opened" datepicker-options="dateOptions" close-text="Cancel">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="birthdayCal.opened=true"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
 			</div>
-		</div>
-		<span class="icon-bar"></span>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Address</span>
-				<textarea class="form-control" rows="3" id="address" ng-model="user.address"></textarea>
+			<span class="icon-bar"></span>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Address</span>
+					<textarea class="form-control" rows="3" id="address" ng-model="user.address"></textarea>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Cellphone Number</span>
-				<input type="text" class="form-control" id="cellphone_number" placeholder="63XXXXXXXXXX" ng-model="user.cellphone_number">
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Cellphone Number</span>
+					<input type="text" class="form-control" id="cellphone_number" placeholder="63XXXXXXXXXX" ng-model="user.cellphone_number">
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Telephone Number</span>
-				<input type="tel" class="form-control" id="telephone_number" placeholder="" ng-model="user.telephone_number">
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Telephone Number</span>
+					<input type="tel" class="form-control" id="telephone_number" placeholder="" ng-model="user.telephone_number">
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Email Address </span>
-				<input type="email" class="form-control" id="email" placeholder="you@email.com" ng-model="user.email" required>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Email Address </span>
+					<input type="email" class="form-control" id="email" placeholder="you@email.com" ng-model="user.email" required>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12 input-group">
-				<span class="input-group-addon">Date Start </span>
-				<input type="date" class="form-control" id="date_start" placeholder="YYYY-MM-DD" ng-model="user.date_start"
-					min="1940-01-01"  required
-				>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<span class="input-group-addon">Date Start </span>
+					<input type="date" class="form-control" id="date_start" placeholder="YYYY-MM-DD" ng-model="user.date_start" required uib-datepicker-popup is-open="dateStartCal.opened" datepicker-options="dateOptions" close-text="Cancel">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="dateStartCal.opened=true"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
 			</div>
-		</div>
-	
-		<div class="well"><span class="label label-info">NOTE</span> A username and initial password will be emailed to you upon successful registration.</div>						
-		<div class="form-group">
-		<div class="col-sm-12">
-			<button type="submit" class="btn btn-primary btn-block">Register</button>
+			<hr/>
+			<div class="form-group">
+				<div class="col-sm-12 input-group">
+					<div class="alert alert-info fade in">
+						<div class="inline">
+						<span class="label label-info">NOTE</span> A username and initial password will be emailed to you upon successful registration.
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Register</button>
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
 	</div>
 </div>

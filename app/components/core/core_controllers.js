@@ -57,7 +57,22 @@ angular.module('leuzin')
     name: '',
     password: ''
   };
- 
+
+  //Angular UI for form
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    // maxDate: new Date(),
+    minDate: new Date(1950, 1, 1),
+    startingDay: 1
+  };
+  $scope.birthdayCal = {
+    opened: false
+  };
+  $scope.dateStartCal = {
+    opened: false
+  };
+
+  //Submit functions
   $scope.signup = function() {
     AuthService.register($scope.user).then(function(msg) {
       $state.go('outside.login');
