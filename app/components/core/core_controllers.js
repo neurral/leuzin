@@ -1,23 +1,20 @@
 angular.module('leuzin')
 
-.controller('AppCtrl', function($scope, AuthService, $state){
-  $scope.showSpinner = function(msg){
-    if (msg)
-      $scope.loadingMessage = msg;
-    else
-      $scope.loadingMessage = "Loading...";
-    angular.element('#load').trigger('click');
-  }
-  $scope.hideSpinner = function(){angular.element('#unload').trigger('click');}
-
+.controller('AppCtrl', function($scope, AuthService, $state, $timeout, ModalService){
+  // TODO add obecjt for modal spinner
+  ModalService.registerObserverCallback(function(){
+    $scope.modalOptions = ModalService.modalOptions;
+    // console.log("$scope modal options: " + JSON.stringify($scope.modalOptions) + "\n service: " + JSON.stringify(ModalService.modalOptions));
+  });
+  
   $scope.syncSession = function(){
       //lets add the session info to the AppCtrl Scope, which is accessible to all controllers
       //we need these $scope vars because we needed variables for ng-if in view. We cant use AuthService for that.
       $scope.session = AuthService.sessionInfo();
       $scope.session.isAuthenticated = AuthService.isAuthenticated();
-      // angular.element('#load').trigger('click');
   }
 
+  //Should this be here?
   $scope.logout = function() {
     AuthService.logout();
     $scope.syncSession();
@@ -25,38 +22,28 @@ angular.module('leuzin')
   };
 })
 
-.controller('LoginCtrl', function($scope, AuthService, $state) {
-  $scope.user = {
-    username: '',
-    password: ''
-  };  
+.controller('LoginCtrl', function($scope, AuthService, $state, ModalService) {
+  $scope.user = {};  
 
   $scope.login = function() {
-    $scope.showSpinner("Logging in...");
+    ModalService.showSpinner("Logging in...");
     $scope.user = {
-      user : {
-        username : $scope.user.username,
-        password : $scope.user.password
-      }
+        user : $scope.user
     }
     AuthService.login($scope.user).then(function(msg) {
       $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
       $state.go('dashboard');
-      $scope.hideSpinner();
+      ModalService.flashSuccess('Login success!',false);
     }, function(errMsg) {
       console.log('Login failed: ', errMsg);
       // alert('Login failed: ', errMsg);
-      $scope.hideSpinner();
+      ModalService.flashFailure('Login failed.',true);
     });
-    
   };
 })
 
-.controller('RegisterCtrl', function($scope, AuthService, $state) {
-  $scope.user = {
-    name: '',
-    password: ''
-  };
+.controller('RegisterCtrl', function($scope, AuthService, $state, ModalService) {
+  $scope.user = {};
 
   //Angular UI for form
   $scope.dateOptions = {
@@ -73,18 +60,18 @@ angular.module('leuzin')
   };
 
   //Submit functions
-  $scope.signup = function() {
+  $scope.register = function() {
+    $scope.user = {
+      user : $scope.user 
+    };
+    // console.log(JSON.stringify($scope.user));
+    ModalService.showSpinner("Requesting registration...");
     AuthService.register($scope.user).then(function(msg) {
-      $state.go('outside.login');
-      var alertPopup = $ionicPopup.alert({
-        title: 'Register success!',
-        template: msg
-      });
+      console.log('Response = ' + JSON.stringify(msg));
+      ModalService.flash("Registered successfully. Please see your email for your username and password.",0,true);
+      $state.go('login');
     }, function(errMsg) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Register failed!',
-        template: errMsg
-      });
+      ModalService.flash("Registration failed.",0,true);
     });
   };
 })

@@ -48,22 +48,14 @@ angular.module('authModule',[])
  
   var register = function(user) {
     return $q(function(resolve, reject) {
-    	user = {
-    		user : {
-    			username: user.username,
-    			password: user.password
-    		}
-    	}
-      $http.post(API_ENDPOINT.url + '/signup', user).then(
+      $http.post(API_ENDPOINT.url + '/register', user).then(
       	function(result) {
-        	if (result.data.success) {
-          	resolve(result.data.msg);
-        	} else {
-          	reject(result.data.msg);
-        	}
+          // console.log(JSON.stringify(result));
+         	resolve(result);
       	},
       	function(result){
       		//TODO: retrieve Reg ERRORS here
+          reject("Failed registration");
       	}
       );
     });

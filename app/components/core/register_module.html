@@ -3,7 +3,7 @@
 		<h3>REGISTER ACCOUNT</h3>
 	</div>
 	<div class="panel-body">
-		<form  accept-charset="UTF-8" class="form" role="form" name="registerForm" ng-submit="register(user)" validate>
+		<form  accept-charset="UTF-8" class="form" role="form" name="registerForm" ng-submit="register(user)" novalidate>
 
 			<div class="form-group">
 				<div class="col-sm-12 input-group">
@@ -29,10 +29,10 @@
 				<div class="col-sm-12 input-group">
 					<span class="input-group-addon">Gender </span>
 					<select class="form-control" id="gender" ng-model="user.gender" required>
-						<option value="0">Prefer not to say</option>
-						<option value="1" selected>Male</option>
-						<option value="2">Female</option>
-						<option value="3">Not Sure</option>
+						<option value="prefer_not_to_disclose">Prefer not to say</option>
+						<option value="male" selected>Male</option>
+						<option value="female">Female</option>
+						<option value="not_sure">Not Sure</option>
 					</select>
 				</div>
 			</div>

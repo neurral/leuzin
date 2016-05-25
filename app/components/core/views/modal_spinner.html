@@ -1,0 +1,20 @@
+<div class="modal modal-lg fade" id="loader" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+		<div class="modal-header" ng-if="modalOpts.title.length > 0">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h4 class="modal-title">{{modalOpts.title}}</h4>
+		</div>
+			<div class="modal-body">
+				<!-- <div class="{{modalOpts.alertType ? 'alert alert-'+modalOpts.alertType : ''}}"> -->
+				<span><b class="glyphicon glyphicon-refresh spinning" ng-if="!modalOpts.isEnd"></b> {{modalOpts.loadingMessage}}</span>
+				</div>
+			<!-- </div> -->
+			<div class="modal-footer" ng-show="modalOpts.allowOk">
+				<button id="unload" type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+	<a id="load" style="display:none" href="" data-toggle="modal" data-target="#loader" data-backdrop="static"></a>
+</div>
