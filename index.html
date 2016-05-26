@@ -53,7 +53,7 @@
 <script type="text/javascript" src="app/components/core/core_directives.js"></script>
 <script type="text/javascript" src="app/components/core/core_services.js"></script>
 </head>
-<body ng-controller="AppCtrl as appCtrl">
+<body ng-controller="AppCtrl as appCtrl" initialization>
 	<div class="container-full-width">
 		<nav class="navbar navbar-inverse" >
 			<div class="container-fluid" >
@@ -84,12 +84,13 @@
 				</div>
 			</div>
 		</nav>
+		<lzspinner options="modalOptions"></lzspinner>
 		<div class="container">
 			<noscript><br /><br /><div class="alert alert-danger" role="alert">Javascript is required to access the Neurral system</div></noscript>
 			<ui-view></ui-view>
 		</div>
 		
-		<lzspinner options="modalOptions"></lzspinner>
+
 
 		<footer class="navbar navbar-fixed-bottom navbar-default">			
 			<sub style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</sub>

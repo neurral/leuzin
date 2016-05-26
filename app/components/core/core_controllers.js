@@ -1,23 +1,26 @@
 angular.module('leuzin')
 
-.controller('AppCtrl', function($scope, AuthService, $state, $timeout, ModalService){
-  // TODO add obecjt for modal spinner
+.controller('AppCtrl', function($rootScope,$scope, AuthService, $state, $timeout, ModalService){
+  /* Synchronizers to $scope */
   ModalService.registerObserverCallback(function(){
-    $scope.modalOptions = ModalService.modalOptions;
+    $rootScope.modalOptions = ModalService.modalOptions;
     // console.log("$scope modal options: " + JSON.stringify($scope.modalOptions) + "\n service: " + JSON.stringify(ModalService.modalOptions));
   });
+  AuthService.registerObserverCallback(function(){
+      $rootScope.session = AuthService.sessionInfo(); 
+  });
   
-  $scope.syncSession = function(){
+  // $scope.syncSession = function(){
       //lets add the session info to the AppCtrl Scope, which is accessible to all controllers
       //we need these $scope vars because we needed variables for ng-if in view. We cant use AuthService for that.
-      $scope.session = AuthService.sessionInfo();
-      $scope.session.isAuthenticated = AuthService.isAuthenticated();
-  }
+      // $scope.session = AuthService.sessionInfo();
+      // $scope.session.isAuthenticated = AuthService.isAuthenticated();
+  // }
 
   //Should this be here?
   $scope.logout = function() {
     AuthService.logout();
-    $scope.syncSession();
+    // $scope.syncSession();
     $state.go('login');
   };
 })
@@ -25,19 +28,33 @@ angular.module('leuzin')
 .controller('LoginCtrl', function($scope, AuthService, $state, ModalService) {
   $scope.user = {};  
 
+  $scope.requestToken = function(){
+    ModalService.showSpinner("Requesting new token...");
+    if ($scope.user.username == undefined) {
+      ModalService.flashFailure('Error! Please enter your username.',true);      
+    }
+    else {
+      AuthService.requestToken($scope.user).then(function(msg) {
+      // $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
+      ModalService.flashSuccess(msg,true);
+    }, function(errMsg) {
+      ModalService.flashFailure('Request failed: ' + errMsg,true);
+    });
+
+    }
+  };
+
   $scope.login = function() {
     ModalService.showSpinner("Logging in...");
     $scope.user = {
         user : $scope.user
     }
     AuthService.login($scope.user).then(function(msg) {
-      $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
+      // $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
+      ModalService.flashSuccess('Login success!', false);
       $state.go('dashboard');
-      ModalService.flashSuccess('Login success!',false);
     }, function(errMsg) {
-      console.log('Login failed: ', errMsg);
-      // alert('Login failed: ', errMsg);
-      ModalService.flashFailure('Login failed.',true);
+      ModalService.flashFailure('Login failed: ' + errMsg,true);
     });
   };
 })
@@ -77,17 +94,37 @@ angular.module('leuzin')
 })
 
 .controller('DashboardCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
-  // $scope.destroySession = function() {
-  //   AuthService.logout();
+  // $scope.getInfo = function() {
+  //   $http.get(API_ENDPOINT.url + '/memberinfo').then(function(result) {
+  //     $scope.memberinfo = result.data.msg;
+  //   });
   // };
+  // $scope.syncSession();
 
-  $scope.getInfo = function() {
-    $http.get(API_ENDPOINT.url + '/memberinfo').then(function(result) {
-      $scope.memberinfo = result.data.msg;
-    });
-  };
+})
+
+.controller('TokenCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state, $stateParams, ModalService, $timeout) {
+  // console.log(JSON.stringify($stateParams));
+
+  var loadNewToken = function(){
+    ModalService.showSpinner("Setting new token for " + $stateParams.username + "...");
+    //activate the new token to API so that it will have an expiry and can be used for log in later!
+    AuthService.activateNewToken($stateParams).then(
+      function(result){
+        ModalService.flashSuccess("Login success!",true);    
+        $state.go('dashboard');
+      },
+      function(result){
+        ModalService.flashFailure("Login failed: "+result, true); 
+        $state.go('login');
+      });
+  }
+
+  //listen to when the body directive has initialized
+  $scope.$on('initialized', function() {
+    loadNewToken();
+  });
   
-  $scope.syncSession();
-});
-
+})
 ;
+

@@ -1,49 +1,50 @@
 angular.module('authModule',[])
-/* THESE ARE RELOCATED IN app.js */
-// .constant('AUTH_EVENTS', {
-//   notAuthenticated: 'auth-not-authenticated'
-// })
-// .constant('API_ENDPOINT', {
-//   url: 'https://neurral-nacc-0.herokuapp.com'
-// })
-  //  For a simulator use: url: 'http://127.0.0.1:8080/api'
-  // url: 'https://neurral-nacc-0.herokuapp.com/'
-  // url: 'http://localhost:3000'
-
 .service("AuthService",["$q", "$http", "API_ENDPOINT", function($q, $http, API_ENDPOINT){
-  var SESSION = 'local_session';  //should we use the token key or..this 'lcoal_session' will cause one session per browser only
-  var isAuthenticated = false;
-  var authToken;
+  var KEY_SESSION = 'local_session';  //should we use the token key or..this 'lcoal_session' will cause one session per browser only
+  var session = {};
+
+
+  //Notifications for AppCtrl
+  var observerCBs = [];
+  var registerObserverCallback = function(callback){
+    observerCBs.push(callback);
+  };
+  var notifyObservers = function(){
+    angular.forEach(observerCBs, function(callback){
+      callback();
+    });
+  };
  
   function loadUserCredentials() {
-    var session = JSON.parse(window.localStorage.getItem(SESSION));
+    session = JSON.parse(window.localStorage.getItem(KEY_SESSION));
     //TODO : add validation check of expiry time if past, or we could validate to the api?
+    // console.log(JSON.stringify(session));
     if (session) {
-      useCredentials(session);
+      useCredentials(session.token);
     }
-    else session = {};
-    return session;
+    else session = undefined;
   }
  
-  function storeUserCredentials(session) {
-    window.localStorage.setItem(SESSION, JSON.stringify(session));
-    useCredentials(session);
+  function storeUserCredentials(userAndToken) {
+    window.localStorage.setItem(KEY_SESSION, JSON.stringify(userAndToken));
+    session = userAndToken;
+    session.isAuthenticated = true;
+    useCredentials(userAndToken.token);
   }
  
-  function useCredentials(session) {
-    isAuthenticated = true;
-    authToken = session.session_key;
- 
+  function useCredentials(token) {
     // Set the token as header for your requests!
-    $http.defaults.headers.common.Authorization = authToken;
-    //you need to pass the username as param in the AJAX call or the request will be invalid despite Authorization header
+    // session.isAuthenticated = isAuthenticated;
+    console.log(session.token);
+    $http.defaults.headers.common.Authorization = "Token token="+token;
+    notifyObservers();
   }
  
   function destroyUserCredentials() {
-    authToken = undefined;
-    isAuthenticated = false;
+    session = undefined;
     $http.defaults.headers.common.Authorization = undefined;
-    window.localStorage.removeItem(SESSION);
+    // window.localStorage.removeItem(KEY_SESSION);
+    notifyObservers();
   }
  
   var register = function(user) {
@@ -55,39 +56,85 @@ angular.module('authModule',[])
       	},
       	function(result){
       		//TODO: retrieve Reg ERRORS here
-          reject("Failed registration");
+          reject(result.data.errors);
       	}
       );
     });
   };
  
   var login = function(user) {
+    loadUserCredentials();
     return $q(function(resolve, reject) {
       $http.post(API_ENDPOINT.url + '/login', user).then(
       	function(result) {
-          console.log("Session: " + JSON.stringify(result.data.session.session_key));
-          if (result) storeUserCredentials(result.data.session);
-          resolve(result);
+          console.log("Session: " + JSON.stringify(result));
+          if (result) {
+            session.isAuthenticated = true;
+            resolve(result.data);
+          }
       	},
       	function(result){
-      		reject("No session");
+          console.log(JSON.stringify(result));
+          destroyUserCredentials();
+      		reject(result.data.errors);
       });
     });
   };
- 
+
+  var requestToken = function(user){
+    return $q(function(resolve, reject) {
+      $http.post(API_ENDPOINT.url + '/request-token/'+user.username).then(
+        function(result) {
+          if (result.status == 202) resolve("Your request is being processed. Please check your email for your access link.");
+        },
+        function(result){
+          console.log(JSON.stringify(result));
+          reject(result.data.errors);
+      });
+    });
+  }
+
+  var activateToken = function(session){
+    return $q(function(resolve, reject) {
+      $http.post(API_ENDPOINT.url + '/in/'+session.username+"?token="+session.token).then(
+        function(result) {
+          if (result.status == 200) {
+            resolve(result);
+            storeUserCredentials(session);
+          }
+          else {
+            reject("Unknown issue, please retry later: " +result.status);
+          }
+        },
+        function(result){
+          console.log(JSON.stringify(result));
+          if (result.status == 404){
+            reject("Bad/expired token.");
+          }
+          else {
+           reject(result.data.errors);
+          }
+      });
+    });
+  }
+
   var logout = function() {
     // TODO : add ajax call for session delete in API
     destroyUserCredentials();
   };
  
-  loadUserCredentials();
+  loadUserCredentials(); //automatically load
  
+  //Exposed functions 
   return {
+    registerObserverCallback: registerObserverCallback,
     login: login,
     register: register,
     logout: logout,
-    isAuthenticated: function() {return isAuthenticated;},
-    sessionInfo: function() {return loadUserCredentials();} 
+    requestToken: requestToken,
+    activateNewToken: activateToken,
+    isAuthenticated: function() {return (session && session.isAuthenticated);},
+    sessionInfo: function() {return session;} 
   };
 }])
  

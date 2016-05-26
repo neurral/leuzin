@@ -7,7 +7,7 @@ angular.module('leuzin')
 	};
 	var notifyObservers = function(){
 		angular.forEach(observerCBs, function(callback){
-      console.log("Notifying...");
+      // console.log("Notifying...");
 			callback();
 		});
 	};
@@ -44,7 +44,7 @@ angular.module('leuzin')
   }
 
   var flash = function(msg, timeOut, isEnd){ 
-  	console.log("Flashing " +msg + " : timeout=" + timeOut);
+  	// console.log("Flashing " +msg + " : timeout=" + timeOut);
     modalOptions.allowOk = false;
     modalOptions.isEnd = isEnd;
     modalOptions.loadingMessage =  msg ? msg : "Loading..."; 
@@ -53,7 +53,7 @@ angular.module('leuzin')
       if (isEnd) modalOptions.allowOk = true;
     }
     else { 
-      console.log("Timing out! " + timeOut);
+      // console.log("Timing out! " + timeOut);
       //TODO timoeout not working when using hte variable passed
       $timeout(function(){hideSpinner()},timeOut);
     }

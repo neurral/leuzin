@@ -29,7 +29,7 @@
 
         $stateProvider
         .state('index', {
-            url: 'index',
+            url: '/index',
             // abstract: true,
             templateUrl: 'app/components/core/views/home.html'
         })
@@ -48,6 +48,10 @@
             templateUrl: 'app/components/core/dash_module.html',
             controller: 'DashboardCtrl'
         })
+        .state('activate_token', {
+            url: "/in/:username?token"
+            ,controller: 'TokenCtrl'
+        })
         .state('404', {
             url: '/404',
             templateUrl: 'app/components/core/views/404.html',
@@ -55,62 +59,41 @@
 
         //when no states the href, go to dashboard. isAuthenticated will be checked in $stateChangeStart
         //and will redirect to login if not logged in.
-        $urlRouterProvider.when('', '/dashboard');
+        $urlRouterProvider.when('', '/index');
         //everything else, 404
         $urlRouterProvider.otherwise('/404');
 
     })
 
 
-  .run(function ($rootScope, $state, AuthService, $http) {
+  .run(function ($rootScope, $state, AuthService, $http, ModalService) {
     // console.log(JSON.stringify($state.get()));
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.headers.common['Accept'] = 'application/json';
 
+    $rootScope.modalOptions = ModalService.modalOptions;
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
         console.log(next.name);
-        if (!AuthService.isAuthenticated()) {
-          if (next.name !== 'login' && next.name !== 'register') {
-            event.preventDefault();
-            $state.go('login');
-        }
-    }
-    else {
-        if (next.name === 'login' || next.name === 'register') {
+        // console.log('RS:' +$rootScope.session + "AUTH'd: "+ JSON.stringify(AuthService.sessionInfo()));
+        // console.log(JSON.stringify("StateParams: " + nextParams));
+        // if(next.name === 'activate_token') {
+        //     event.preventDefault();
+        //     //replace this with validation call to API, if true let AuthService save and go to dashboard, else login.
+        //     AuthService.storeToken(nextParams);
+        //     $state.go('dashboard');
+        // }
+        // else {
+            if (!AuthService.isAuthenticated()) {
+                if (next.name !== 'login' && next.name !== 'register' && next.name !== 'activate_token') {
+                    event.preventDefault();
+                    $state.go('login');
+                }
+            }
+            else {
+                if (next.name === 'login' || next.name === 'register') {
                     event.preventDefault(); //do not allow login or register if already logged in
                 }
             }
-        });
+        // }
+    });
 });
-
-
-// .directive("navigation", function () {
-//     return {
-//         restrict: 'E',
-//         replace: 'true',
-//         // template: '<h3>Component</h3>'
-//         // template: function(app){
-//         //  return app
-//         // }
-//         templateUrl: "app/components/core/views/navbar.html"
-//     };
-// })
-// .controller('myCtrl', function(SessionLoader) {
-//     var self = this;
-//     self.session ={ 
-//         session : {
-//             username : "2013000016",
-//             session_key : "fgypsbwmkgtbafzu"
-//         }
-//     };
-//     SessionLoader.retrieveSession(self.session)
-//     .then(function(response){
-//         //successfull session check
-//         self.session =  response.session;
-//     },function(response){
-//         //promise rejected
-//         self.session = null;
-//     });
-//     console.log("Session by service: " + JSON.stringify(self.session));
-
-// })
