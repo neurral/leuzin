@@ -56,7 +56,7 @@ angular.module('authModule',[])
       	},
       	function(result){
       		//TODO: retrieve Reg ERRORS here
-          reject(result.data.errors);
+          reject(result.status);
       	}
       );
     });

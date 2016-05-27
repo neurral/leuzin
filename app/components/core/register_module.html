@@ -3,8 +3,8 @@
 		<h3>REGISTER ACCOUNT</h3>
 	</div>
 	<div class="panel-body">
-		<form  accept-charset="UTF-8" class="form" role="form" name="registerForm" ng-submit="register(user)" novalidate>
-
+		<!-- <form  accept-charset="UTF-8" class="form" role="form" name="registerForm" ng-submit="register(user)" novalidate> -->
+		<form  accept-charset="UTF-8" class="form" role="form" name="registerForm" novalidate>
 			<div class="form-group">
 				<div class="col-sm-12 input-group">
 					<span class="input-group-addon">First Name</span>
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<div class="col-sm-12 input-group">
 					<span class="input-group-addon">Gender </span>
 					<select class="form-control" id="gender" ng-model="user.gender" required>
@@ -63,7 +63,7 @@
 					<span class="input-group-addon">Telephone Number</span>
 					<input type="tel" class="form-control" id="telephone_number" placeholder="" ng-model="user.telephone_number">
 				</div>
-			</div>
+			</div> -->
 			<div class="form-group">
 				<div class="col-sm-12 input-group">
 					<span class="input-group-addon">Email Address </span>
@@ -87,7 +87,9 @@
 						<span class="label label-info">NOTE</span> A username and initial password will be emailed to you upon successful registration.
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary btn-block">Register</button>
+					{{user}}
+					<!-- <button type="submit" class="btn btn-primary btn-block">Register</button> -->
+					<button type="submit" class="btn btn-primary btn-block" ng-click="register(user)" >Register</button>
 				</div>
 			</div>
 		</form>

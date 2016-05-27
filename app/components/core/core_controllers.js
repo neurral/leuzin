@@ -46,10 +46,7 @@ angular.module('leuzin')
 
   $scope.login = function() {
     ModalService.showSpinner("Logging in...");
-    $scope.user = {
-        user : $scope.user
-    }
-    AuthService.login($scope.user).then(function(msg) {
+    AuthService.login(JSON.stringify({ user: $scope.user })).then(function(msg) {
       // $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
       ModalService.flashSuccess('Login success!', false);
       $state.go('dashboard');
@@ -60,7 +57,9 @@ angular.module('leuzin')
 })
 
 .controller('RegisterCtrl', function($scope, AuthService, $state, ModalService) {
-  $scope.user = {};
+  $scope.user = {
+    date_start : new Date()
+  };
 
   //Angular UI for form
   $scope.dateOptions = {
@@ -78,17 +77,14 @@ angular.module('leuzin')
 
   //Submit functions
   $scope.register = function() {
-    $scope.user = {
-      user : $scope.user 
-    };
     // console.log(JSON.stringify($scope.user));
     ModalService.showSpinner("Requesting registration...");
-    AuthService.register($scope.user).then(function(msg) {
+    AuthService.register(JSON.stringify({ user: $scope.user })).then(function(msg) {
       console.log('Response = ' + JSON.stringify(msg));
-      ModalService.flash("Registered successfully. Please see your email for your username and password.",0,true);
+      ModalService.flash("Registered successfully. Please see your email for your access link.",0,true);
       $state.go('login');
     }, function(errMsg) {
-      ModalService.flash("Registration failed.",0,true);
+      ModalService.flash("Registration failed: Error " + errMsg,0,true);
     });
   };
 })
