@@ -112,7 +112,7 @@ angular.module('leuzin')
       },
       function(result){
         ModalService.flashFailure("Login failed: "+result, true); 
-        $state.go('login');
+        // $state.go('login');
       });
   }
 
