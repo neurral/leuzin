@@ -49,8 +49,10 @@
             controller: 'DashboardCtrl'
         })
         .state('activate_token', {
-            url: "/in/:username?token"
-            ,controller: 'TokenCtrl'
+            url: "/in/:username?token",
+            templateUrl: 'app/components/core/token_module.html',
+            controller: 'TokenCtrl'
+
         })
         .state('404', {
             url: '/404',

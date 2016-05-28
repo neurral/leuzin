@@ -101,6 +101,7 @@ angular.module('leuzin')
 
 .controller('TokenCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state, $stateParams, ModalService, $timeout) {
   // console.log(JSON.stringify($stateParams));
+  $scope.message = '';
 
   var loadNewToken = function(){
     ModalService.showSpinner("Setting new token for " + $stateParams.username + "...");
@@ -111,12 +112,14 @@ angular.module('leuzin')
         $state.go('dashboard');
       },
       function(result){
-        ModalService.flashFailure("Login failed: "+result, true); 
-        // $state.go('login');
+        $scope.message = result[0];
+        // ModalService.flashFailure("Login failed: "+result, true); 
+        ModalService.flashWithCB("Login failed: "+result, true, function(){$state.go('login');});        
       });
   }
 
   //listen to when the body directive has initialized
+  //use $watch instead of orig $on?
   $scope.$on('initialized', function() {
     loadNewToken();
   });

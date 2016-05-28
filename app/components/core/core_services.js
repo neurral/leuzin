@@ -75,6 +75,16 @@ angular.module('leuzin')
   var flashInfo = function(msg,withOK){
   	flash(msg,(withOK ? 0 : 2000),withOK);
   }
+  var flashWithCB = function(msg,withOK,cb){
+    flash(msg,(withOK ? 0 : 2000),withOK);
+    if (cb){
+      if (withOK) {
+        //bind the callback (e.g. a #state.go after the flash) to the OK button
+        angular.element('#unload').bind('click',cb);
+      }
+      else cb();
+    } 
+  }
 
   return {
     // resetModal: resetModal,
@@ -84,6 +94,7 @@ angular.module('leuzin')
   	flashSuccess: flashSuccess,
   	flashInfo: flashInfo,
   	flashFailure: flashFailure,
+    flashWithCB: flashWithCB,
   	modalOptions: modalOptions
   };
 

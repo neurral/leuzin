@@ -105,6 +105,7 @@ angular.module('authModule',[])
           else {
             reject("Unknown issue, please retry later: " +result.status);
           }
+          // TODO check why this does not produce modal in heroku
         },
         function(result){
           console.log(JSON.stringify(result));

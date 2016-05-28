@@ -9,7 +9,7 @@ angular.module('leuzin')
 				to = setTimeout(function () {
 					console.log('initialized');
 					listener();
-					$rootScope.$broadcast('initialized');
+					$rootScope.$broadcast('initialized'); //TODO should I $emit this shit?
 				}, 50);
 			});
 		}
