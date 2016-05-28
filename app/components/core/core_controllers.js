@@ -50,7 +50,7 @@ angular.module('leuzin')
 
   //listen to when the body directive has initialized
   //use $watch instead of orig $on?
-  $scope.$on('initialized', function() {
+  $scope.$watch('initialized', function() {
     console.log("calling loadNewToken");
     loadNewToken();
   });
