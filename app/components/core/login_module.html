@@ -17,8 +17,8 @@
 			</div>
 		</div> -->
 		 <div class="row">
-  			<div class="col-sm-6"><button type="submit" class="btn btn-primary btn-block">Login</button></div>
-  			<div class="col-sm-6"><a href="#" class="btn btn-default btn-block" ng-click="requestToken(user)">Request new token...</a></div>
+  			<div class="col-sm-6"><button type="submit" class="btn btn-primary btn-block" ng-disabled="!user.username">Login</button></div>
+  			<div class="col-sm-6"><a href="#" class="btn btn-default btn-block" ng-click="requestToken(user)" ng-disabled="!user.username">Request new token...</a></div>
 		</div>
 	</form>
 
