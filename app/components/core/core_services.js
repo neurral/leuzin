@@ -35,11 +35,13 @@ angular.module('leuzin')
 
   var showSpinner = function(msg){
     flash(msg,0,false);
-    angular.element('#load').trigger('click');
+    // angular.element('#load').trigger('click');
+    angular.element(document.querySelector('#load')).trigger('click');
   }
 
   var hideSpinner = function(){
-    angular.element('#unload').trigger('click');
+    // angular.element('#unload').trigger('click');
+    angular.element(document.querySelector('#unload')).trigger('click');
     // resetModal();
   }
 
