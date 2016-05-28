@@ -10,7 +10,7 @@ angular.module('leuzin')
 					console.log('initialized');
 					listener();
 					$rootScope.$broadcast('initialized'); //TODO should I $emit this shit?
-				}, 50);
+				}, 500);
 			});
 		}
 	};

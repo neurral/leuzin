@@ -44,7 +44,7 @@ angular.module('leuzin')
     // angular.element('#unload').trigger('click');
     angular.element(document.querySelector('#unload')).trigger('click');
     // resetModal();
-    console.log("Hide spinner: " + msg);
+    console.log("Hide spinner");
   }
 
   var flash = function(msg, timeOut, isEnd){ 
