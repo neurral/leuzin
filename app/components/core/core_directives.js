@@ -1,5 +1,6 @@
 angular.module('leuzin')
 .directive('initialization',['$rootScope',function($rootScope) {
+	//this basically executes a timeout before broadcasting the "intialized string for activate_token"
 	return {
 		restrict: 'A',
 		link: function($scope) {
