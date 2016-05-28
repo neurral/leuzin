@@ -115,7 +115,7 @@ angular.module('leuzin')
       console.log('Response = ' + JSON.stringify(msg));
       // ModalService.flash("Registered successfully. Please see your email for your access link.",0,true);
       // $state.go('login');
-      ModalService.flashWithCB("Login success!",true, function(){$state.go('login');});
+      ModalService.flashWithCB("Registration submitted! You will be emailed once your account is approved by an administrator.",true, function(){$state.go('login');});
     }, function(errMsg) {
       ModalService.flash("Registration failed: Error " + errMsg,0,true);
     });
