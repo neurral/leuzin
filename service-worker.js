@@ -1,11 +1,21 @@
-var dataCacheName = 'weatherData-v1';
-var cacheName = 'weatherPWA-step-7-1';
+var dataCacheName = 'neurral-leuzin-data';
+var cacheName = 'neurral-leuzin-assets';
+
+/* Once finalized, add:
+  * index
+  * js modules
+  * custom.css
+  * icons / images
+*/
+
 var filesToCache = [
 //  '/',
-  'index.html',
-  'app/app.js',
   'assets/css/bootstrap.min.css',
-  'assets/css/custom.css'
+  'assets/fonts/*',
+  'assets/js/angular*',
+  'assets/js/bootstrap*',
+  'assets/js/ui-bootstrap*',
+  'assets/js/jquery*'
 ];
 
 self.addEventListener('install', function(e) {
@@ -32,25 +42,26 @@ self.addEventListener('activate', function(e) {
   );
 });
 
-self.addEventListener('fetch', function(e) {
-  console.log('[ServiceWorker] Fetch', e.request.url);
-  var dataUrl = 'http://localhost:3000/';
-  if (e.request.url.indexOf(dataUrl) === 0) {
-    e.respondWith(
-      fetch(e.request)
-        .then(function(response) {
-          return caches.open(dataCacheName).then(function(cache) {
-            cache.put(e.request.url, response.clone());
-            console.log('[ServiceWorker] Fetched&Cached Data');
-            return response;
-          });
-        })
-    );
-  } else {
-    e.respondWith(
-      caches.match(e.request).then(function(response) {
-        return response || fetch(e.request);
-      })
-    );
-  }
-});
+/* FOr fetching DATA */
+// self.addEventListener('fetch', function(e) {
+//   console.log('[ServiceWorker] Fetch', e.request.url);
+//   var dataUrl = 'http://localhost:3000/';
+//   if (e.request.url.indexOf(dataUrl) === 0) {
+//     e.respondWith(
+//       fetch(e.request)
+//         .then(function(response) {
+//           return caches.open(dataCacheName).then(function(cache) {
+//             cache.put(e.request.url, response.clone());
+//             console.log('[ServiceWorker] Fetched&Cached Data');
+//             return response;
+//           });
+//         })
+//     );
+//   } else {
+//     e.respondWith(
+//       caches.match(e.request).then(function(response) {
+//         return response || fetch(e.request);
+//       })
+//     );
+//   }
+// });

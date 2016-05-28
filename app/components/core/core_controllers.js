@@ -81,8 +81,9 @@ angular.module('leuzin')
     ModalService.showSpinner("Requesting registration...");
     AuthService.register(JSON.stringify({ user: $scope.user })).then(function(msg) {
       console.log('Response = ' + JSON.stringify(msg));
-      ModalService.flash("Registered successfully. Please see your email for your access link.",0,true);
-      $state.go('login');
+      // ModalService.flash("Registered successfully. Please see your email for your access link.",0,true);
+      // $state.go('login');
+      ModalService.flashWithCB("Login success!",true, function(){$state.go('login');});
     }, function(errMsg) {
       ModalService.flash("Registration failed: Error " + errMsg,0,true);
     });
@@ -108,8 +109,9 @@ angular.module('leuzin')
     //activate the new token to API so that it will have an expiry and can be used for log in later!
     AuthService.activateNewToken($stateParams).then(
       function(result){
-        ModalService.flashSuccess("Login success!",true);    
-        $state.go('dashboard');
+        // ModalService.flashSuccess("Login success!",true);    
+        // $state.go('dashboard');
+        ModalService.flashWithCB("Login success!",false, function(){$state.go('dashboard');});
       },
       function(result){
         $scope.message = result[0];

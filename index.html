@@ -4,9 +4,9 @@
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache"> -->
 	
 	<!-- Used for HTML5 prevention of # urls. IE9 Compatibility -->
 	<!-- <base href="/"> -->
@@ -18,40 +18,40 @@
 	<link rel="manifest" href="manifest.json">
 
 	<!-- Add to homescreen for Chrome on Android -->
-	<!-- <meta name="mobile-web-app-capable" content="yes"> -->
-	<!-- <meta name="application-name" content="Web Starter Kit"> -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="Leuzin">
 	<!-- <link rel="icon" sizes="192x192" href="assets/images/touch/chrome-touch-icon-192x192.png"> -->
 
 	<!-- Add to homescreen for Safari on iOS -->
-  <!--   <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
-    <link rel="apple-touch-icon" href="assets/images/touch/apple-touch-icon.png">
--->
-<!-- Tile icon for Win8 (144x144 + tile color) -->
-<!--     <meta name="msapplication-TileImage" content="assets/images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#2F3BA2">
--->
-<!-- Color the status bar on mobile devices -->
-<meta name="theme-color" content="#2F3BA2">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+	<link rel="apple-touch-icon" href="assets/images/touch/apple-touch-icon.png">
 
-<title>leuzin</title>
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-<!-- <link rel="stylesheet" href="assets/css/sandstone/bootstrap.min.css" /> -->
-<link rel="stylesheet" href="assets/css/custom.css" />
+	<!-- Tile icon for Win8 (144x144 + tile color) -->
+	<meta name="msapplication-TileImage" content="assets/images/touch/ms-touch-icon-144x144-precomposed.png">
+	<meta name="msapplication-TileColor" content="#2F3BA2">
 
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/angular.min.js"></script>
-<script type="text/javascript" src="assets/js/angular-ui-router.min.js"></script>
-<script type="text/javascript" src="assets/js/ui-bootstrap-tpls-1.3.2.min.js"></script>
-<!-- Main scripts -->
-<script type="text/javascript" src="app/components/core/auth_module.js"></script>
-<script type="text/javascript" src="app/app.js"></script>
-<script type="text/javascript" src="app/components/core/core_directives.js"></script>
-<script type="text/javascript" src="app/components/core/core_constants.js"></script>
-<script type="text/javascript" src="app/components/core/core_controllers.js"></script>
-<script type="text/javascript" src="app/components/core/core_services.js"></script>
+	<!-- Color the status bar on mobile devices -->
+	<meta name="theme-color" content="#2F3BA2">
+
+	<title>leuzin</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	<!-- <link rel="stylesheet" href="assets/css/sandstone/bootstrap.min.css" /> -->
+	<link rel="stylesheet" href="assets/css/custom.css" />
+
+	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/angular.min.js"></script>
+	<script type="text/javascript" src="assets/js/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="assets/js/ui-bootstrap-tpls-1.3.2.min.js"></script>
+	<!-- Main scripts -->
+	<script type="text/javascript" src="app/components/core/auth_module.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/components/core/core_directives.js"></script>
+	<script type="text/javascript" src="app/components/core/core_constants.js"></script>
+	<script type="text/javascript" src="app/components/core/core_controllers.js"></script>
+	<script type="text/javascript" src="app/components/core/core_services.js"></script>
 </head>
 <body ng-controller="AppCtrl as appCtrl" initialization>
 	<div class="container-full-width">
@@ -96,7 +96,18 @@
 			<sub style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</sub>
 		</footer>
 	</div>
-
-
+<script>
+	//TODO use sw-precache?
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+          .then(function(registration) { 
+                console.log('Service Worker Registered'); 
+          });
+          
+        navigator.serviceWorker.ready.then(function(registration) { 
+           console.log('Service Worker Ready');
+        });
+      }
+</script>
 </body>
 </html>
