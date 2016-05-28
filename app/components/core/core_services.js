@@ -34,6 +34,7 @@ angular.module('leuzin')
   // };	
 
   var showSpinner = function(msg){
+    console.log("Show spinner: " + msg);
     flash(msg,0,false);
     // angular.element('#load').trigger('click');
     angular.element(document.querySelector('#load')).trigger('click');
@@ -43,6 +44,7 @@ angular.module('leuzin')
     // angular.element('#unload').trigger('click');
     angular.element(document.querySelector('#unload')).trigger('click');
     // resetModal();
+    console.log("Hide spinner: " + msg);
   }
 
   var flash = function(msg, timeOut, isEnd){ 
