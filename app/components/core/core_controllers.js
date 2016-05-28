@@ -105,6 +105,7 @@ angular.module('leuzin')
   $scope.message = '';
 
   var loadNewToken = function(){
+    console.log("loading new token");
     ModalService.showSpinner("Setting new token for " + $stateParams.username + "...");
     //activate the new token to API so that it will have an expiry and can be used for log in later!
     AuthService.activateNewToken($stateParams).then(
@@ -123,6 +124,7 @@ angular.module('leuzin')
   //listen to when the body directive has initialized
   //use $watch instead of orig $on?
   $scope.$on('initialized', function() {
+    console.log("calling loadNewToken");
     loadNewToken();
   });
   
