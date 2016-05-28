@@ -102,6 +102,9 @@ angular.module('authModule',[])
             resolve(result);
             storeUserCredentials(session);
           }
+          else if (result.status == 409){
+            reject(result);
+          }
           else {
             reject("Unknown issue, please retry later: " +result.status);
           }
