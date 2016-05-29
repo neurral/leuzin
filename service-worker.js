@@ -11,36 +11,71 @@ var cacheName = 'neurral-leuzin-assets';
 var filesToCache = [
 //  '/',
   'assets/css/bootstrap.min.css',
-  'assets/fonts/*',
-  'assets/js/angular*',
-  'assets/js/bootstrap*',
-  'assets/js/ui-bootstrap*',
-  'assets/js/jquery*'
+  'assets/fonts/glyphicons-halflings-regular.eot',
+  'assets/fonts/glyphicons-halflings-regular.svg',
+  'assets/fonts/glyphicons-halflings-regular.ttf',
+  'assets/fonts/glyphicons-halflings-regular.woff',
+  'assets/fonts/glyphicons-halflings-regular.woff2',
+  'assets/js/angular.min.js',
+  'assets/js/bootstrap.min.js',
+  'assets/js/jquery.min.js',
+  'assets/js/ui-bootstrap-tpls-1.3.2.min.js'
 ];
+
+
+/* Skips waiting */
 
 self.addEventListener('install', function(e) {
   console.log('[ServiceWorker] Install');
   e.waitUntil(
     caches.open(cacheName).then(function(cache) {
       console.log('[ServiceWorker] Caching App Shell');
-      return cache.addAll(filesToCache);
+      return cache.addAll(filesToCache)      
+      .then(() => self.skipWaiting());
+    })
+  )
+});
+
+self.addEventListener('activate',  event => {
+  console.log('[ServiceWorker] Activate');
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', event => {
+  console.log('[ServiceWorker] Fetch');
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
     })
   );
 });
 
-self.addEventListener('activate', function(e) {
-  console.log('[ServiceWorker] Activate');
-  e.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        console.log('[ServiceWorker] Removing old cache', key);
-        if (key !== cacheName) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-});
+
+/* Waits */
+
+// self.addEventListener('install', function(e) {
+//   console.log('[ServiceWorker] Install');
+//   e.waitUntil(
+//     caches.open(cacheName).then(function(cache) {
+//       console.log('[ServiceWorker] Caching App Shell');
+//       return cache.addAll(filesToCache);
+//     })
+//   );
+// });
+
+// self.addEventListener('activate', function(e) {
+//   console.log('[ServiceWorker] Activate');
+//   e.waitUntil(
+//     caches.keys().then(function(keyList) {
+//       return Promise.all(keyList.map(function(key) {
+//         console.log('[ServiceWorker] Removing old cache', key);
+//         if (key !== cacheName) {
+//           return caches.delete(key);
+//         }
+//       }));
+//     })
+//   );
+// });
 
 /* FOr fetching DATA */
 // self.addEventListener('fetch', function(e) {

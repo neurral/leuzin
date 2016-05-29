@@ -4,15 +4,15 @@
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Pragma" content="no-cache">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache"> -->
 	
 	<!-- Used for HTML5 prevention of # urls. IE9 Compatibility -->
 	<!-- <base href="/"> -->
 
 	<!-- Disable tap highlight on IE -->
-	<!-- <meta name="msapplication-tap-highlight" content="no"> -->
+	<meta name="msapplication-tap-highlight" content="no">
 
 	<!-- Web Application Manifest -->
 	<link rel="manifest" href="manifest.json">
@@ -96,18 +96,18 @@
 			<sub style="color: gray;"> &copy; 2016 Neurral. Any rights reserved.</sub>
 		</footer>
 	</div>
-<script>
-	//TODO use sw-precache?
-      // if('serviceWorker' in navigator) {
-      //   navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-      //     .then(function(registration) { 
-      //           console.log('Service Worker Registered'); 
-      //     });
-          
-      //   navigator.serviceWorker.ready.then(function(registration) { 
-      //      console.log('Service Worker Ready');
-      //   });
-      // }
-</script>
+	<!-- <script src="service-worker.js" type="text/javascript"></script> -->
+	<script type="text/javascript">
+		if('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+			.then(function(registration) { 
+				console.log('Service Worker Registered'); 
+			});
+
+			navigator.serviceWorker.ready.then(function(registration) { 
+				console.log('Service Worker Ready');
+			});
+		}
+	</script>
 </body>
 </html>
