@@ -25,6 +25,8 @@ var filesToCache = [
 
 /* Skips waiting */
 
+
+//parenthesis issue
 // self.addEventListener('install', function(e) {
 //   console.log('[ServiceWorker] Install');
 //   e.waitUntil(
