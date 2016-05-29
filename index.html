@@ -55,7 +55,7 @@
 </head>
 <body ng-controller="AppCtrl as appCtrl" initialization>
 	<div class="container-full-width">
-		<nav class="navbar navbar-inverse" >
+		<nav class="navbar navbar-inverse" id="myNav">
 			<div class="container-fluid" >
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -65,7 +65,7 @@
 					</button>
 					<a class="navbar-brand" id="neurral-brand" href="/" ui-sref="dashboard">neurral \\\ <span  id="neurral-sub">leuzin</span></a>
 				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
+				<div class="collapse navbar-collapse" id="myNavbar" ng-switch on="session.isAuthenticated">
 					<ul class="nav navbar-nav">
 						<!-- <li><a href="#/">Home</a></li> -->
 						<!-- <li><a href="#">Page 1</a></li> -->
@@ -73,12 +73,12 @@
 						<!-- <li><a href="#">Page 3</a></li> -->
 					</ul>
 					<!-- Menu when not logged in -->
-					<ul class="nav navbar-nav navbar-right" id="outside-menu1" ng-if="!session.isAuthenticated">
+					<ul class="nav navbar-nav navbar-right" id="outside-menu1" ng-switch-default>
 						<li><a href="#" ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 						<li><a href="#" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 					</ul>
 					<!-- Menu when logged in -->
-					<ul class="nav navbar-nav navbar-right" id="outside-menu2" ng-if="session.isAuthenticated">
+					<ul class="nav navbar-nav navbar-right" id="outside-menu2" ng-switch-when="true">
 						<li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</ul>
 				</div>
@@ -113,7 +113,7 @@
 			// exception is specific to Firefox.
 			if(e.name !== 'SecurityError')
 				throw e;
-			return;
+			// return;
 		}
 	</script>
 </body>

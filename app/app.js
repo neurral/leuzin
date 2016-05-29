@@ -16,7 +16,7 @@
     // url: 'https://neurral-nacc-0.herokuapp.com/'
     // url: 'http://localhost:3000'
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
         // $locationProvider.html5Mode(true);
         // $locationProvider.html5Mode({
         //   enabled: true,
@@ -65,10 +65,11 @@
         //everything else, 404
         $urlRouterProvider.otherwise('/404');
 
-    })
+    }])
 
 
-  .run(function ($rootScope, $state, AuthService, $http, ModalService) {
+  .run([ '$rootScope', '$state', 'AuthService', '$http', 'ModalService',
+    function ($rootScope, $state, AuthService, $http, ModalService) {
     // console.log(JSON.stringify($state.get()));
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.headers.common['Accept'] = 'application/json';
@@ -98,4 +99,4 @@
             }
         // }
     });
-});
+}]);

@@ -12,6 +12,10 @@ a, a:hover, a:active, a:focus {
 	outline: 0;
 }
 
+.panel-heading {
+	font-size: 1.50em;	
+}
+
 /* button effect for links*/
 a:active:not(.navbar-brand) {
 	position: relative;
@@ -19,23 +23,85 @@ a:active:not(.navbar-brand) {
 	outline: 0px;
 }
 
-/*fix hidden content below fixed nav*/
+
+/* default screen, non-retina */
+body {
+	background-image: url('../../assets/images/bg/plane970@2x.jpg');
+    /*background-size: 100%;*/
+    /*background-size: auto 100%;*/
+    background-size: cover; /* fit bg to screen */
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 320px) {
+    /* Small screen, non-retina */
+    body { background-image: url("../../assets/images/bg/plane290.jpg"); }
+}
+@media
+only screen and (min-resolution: 2dppx) and (max-width: 320px) {
+    /* Small screen, retina */
+    body { background-image: url("../../assets/images/bg/plane538.jpg"); }
+}
+@media only screen and (min-width: 321px) and (max-width: 538px) {
+    /* Medium screen, non-retina */
+    body { background-image: url("../../assets/images/bg/plane538.jpg"); }
+}
+@media
+only screen and (min-resolution: 2dppx) and (min-width: 321px) and (max-width: 538px) {
+    /* Medium screen, retina */
+    body { background-image: url("../../assets/images/bg/plane970.jpg"); }
+}
+@media
+only screen and (min-resolution: 2dppx) and (min-width: 539px) {
+    /* Large screen, retina */
+    body { background-image: url("../../assets/images/bg/plane970@2x.jpg"); }
+}
+
 .container {
-	 padding-bottom: 70px;
+	padding-bottom: 90px; /*fix hidden content gap below fixed nav*/
 	padding-right:10px; 
 	padding-left:10px;
 }
 
+/* Background for Ui-View */
+.container > .ng-scope > .panel {
+	background: #fff;
+    background:rgba(255,255,255,0.8);
+
+/*    filter:blur(4px);
+    -o-filter:blur(4px);
+    -ms-filter:blur(4px);
+    -moz-filter:blur(4px);
+    -webkit-filter:blur(4px);*/
+}
+
+
+/* Navbar Stuff */
+
 #neurral-brand, .panel-heading, .input-group-addon {
 	font-family: 'Open Sans Condensed', 'Arial-Narrow', sans-serif;
 }
+#neurral-brand {
+	text-shadow: 0 1px 5px #000,
+}
 #neurral-sub {
 	font-variant: small-caps;
+	transition: all ease 0.3s;
 }
 
-.panel-heading {
-	font-size: 1.50em;	
+#myNav:hover #neurral-sub {
+	/*When hovering over the brand, change the sub-brand(leuzin) color*/
+	color: #fff;
+	text-shadow: 0 1px 3px #000, 0 0 20px #fff;
 }
+
+.navbar {
+	background-color: #111;
+	box-shadow:1px 1px 10px 25px #333 inset;
+	box-radius: 0px;
+}
+
 
 /* Spinning Loader */
 .glyphicon.spinning {
@@ -62,9 +128,16 @@ a:active:not(.navbar-brand) {
 	text-align: center;
 }
 
+
+
 /* Loader Modal centered fix*/
 #loader {
 	width: 100%;
+	background: #444;
+	background: rgba(0,0,0,0.7);
+}
+#laoder .modal {
+	border-radius: 10px;
 }
 #loader .modal-dialog {
 	width: 100%;
@@ -77,4 +150,10 @@ a:active:not(.navbar-brand) {
   min-height: 100%;
   border-radius: 0;
   font-size: 1.5em;
+}
+
+
+/* Login form buttons*/
+form .btn-block  {
+	margin-bottom: 5px;
 }

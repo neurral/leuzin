@@ -11,15 +11,15 @@ var cacheName = 'neurral-leuzin-assets';
 var filesToCache = [
 //  '/',
   'assets/css/bootstrap.min.css',
+  'assets/js/angular.min.js',
+  'assets/js/bootstrap.min.js',
+  'assets/js/jquery.min.js',
+  'assets/js/ui-bootstrap-tpls-1.3.2.min.js',
   'assets/fonts/glyphicons-halflings-regular.eot',
   'assets/fonts/glyphicons-halflings-regular.svg',
   'assets/fonts/glyphicons-halflings-regular.ttf',
   'assets/fonts/glyphicons-halflings-regular.woff',
-  'assets/fonts/glyphicons-halflings-regular.woff2',
-  'assets/js/angular.min.js',
-  'assets/js/bootstrap.min.js',
-  'assets/js/jquery.min.js',
-  'assets/js/ui-bootstrap-tpls-1.3.2.min.js'
+  'assets/fonts/glyphicons-halflings-regular.woff2'
 ];
 
 
@@ -42,7 +42,7 @@ var filesToCache = [
 self.addEventListener('install', function(event) {
   console.log('[ServiceWorker] Install');
   event.waitUntil(
-  caches.open(cacheName).then(function(cache) {
+    caches.open(cacheName).then(function(cache) {
         // Important to `return` the promise here to have `skipWaiting()`
         // fire after the cache has been updated.
         console.log('[ServiceWorker] Caching App Shell');
@@ -57,8 +57,6 @@ self.addEventListener('install', function(event) {
     })
   );
 });
-
-
 
 
 
