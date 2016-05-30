@@ -1,7 +1,12 @@
 angular.module("leuzin")
 
+
+.constant('APP_PROPERTIES',{
+	name: 'leuzin',
+	display_name: 'Leuzin'
+})
 .constant('AUTH_EVENTS', {
-notAuthenticated: 'auth-not-authenticated'
+	notAuthenticated: 'auth-not-authenticated'
 })
 .constant('API_ENDPOINT', {
 	url: 'https://neurral-nacc-0.herokuapp.com'

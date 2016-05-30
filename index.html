@@ -36,7 +36,7 @@
 	<!-- Color the status bar on mobile devices -->
 	<meta name="theme-color" content="#006899">
 
-	<title>leuzin</title>
+	<title ng-bind="title">leuzin </title>
 	<link rel="icon" type="image/png" href="favicon.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<!-- <link rel="stylesheet" href="assets/css/sandstone/bootstrap.min.css" /> -->
@@ -65,11 +65,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" id="neurral-brand" href="/" ui-sref="dashboard">neurral \\\ <span  id="neurral-sub">leuzin</span></a>
+					<a class="navbar-brand" id="neurral-brand" href="/" ui-sref="index">neurral \\\ <span  id="neurral-sub">leuzin</span></a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar" ng-switch on="session.isAuthenticated">
 					<ul class="nav navbar-nav">
-						<!-- <li><a href="#/">Home</a></li> -->
+						<li ng-switch-when="true"><a href="#" ui-sref="dashboard">Dashboard</a></li>
 						<!-- <li><a href="#">Page 1</a></li> -->
 						<!-- <li><a href="#">Page 2</a></li> -->
 						<!-- <li><a href="#">Page 3</a></li> -->
