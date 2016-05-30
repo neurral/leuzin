@@ -108,8 +108,7 @@
 				});
 			}
 		} catch(e) {
-			// Rethrow exception if it's not a SecurityError. Note that SecurityError
-			// exception is specific to Firefox.
+			// Rethrow exception if it's not a SecurityError. Note that SecurityError exception is specific to Firefox.
 			if(e.name !== 'SecurityError')
 				throw e;
 			// return;
