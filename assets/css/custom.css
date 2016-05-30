@@ -27,6 +27,10 @@ a:active:not(.navbar-brand) {
 
 /* default screen, non-retina */
 html {
+	/* These two are for sticky footer*/
+	position: relative;
+	min-height: 100%;
+
 	background: url('../../assets/images/bg/plane970.jpg') no-repeat top center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -62,12 +66,23 @@ only screen and (min-resolution: 2dppx) and (min-width: 321px) and (max-width: 5
     html { background-image: url("../../assets/images/bg/plane970@2x.jpg"); }
 }
 
-.container,body {background-color:transparent;}
+.container, body {background-color:transparent;}
 
+body {
+	margin-bottom: 50px; /* must equal footer height */
+}
 .container {
-	padding-bottom: 90px; /*fix hidden content gap below fixed nav*/
+	/*padding-bottom: 90px; fix hidden content gap below fixed nav*/
 	padding-right:10px; 
 	padding-left:10px;
+	min-height: 100%;
+}
+footer {
+	background-color: #111;
+	width: 100%;
+	height: 50px;  /* must equal body margin bottom */
+	position:absolute;
+	bottom: 0;
 }
 
 /* Background for Ui-View */
