@@ -78,6 +78,7 @@
     // console.log(JSON.stringify($state.get()));
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.headers.common['Accept'] = 'application/json';
+    $http.defaults.headers.common['Cache-Control'] = 'max-age=0, no-cache, no-store, must-revalidate';
 
     $rootScope.modalOptions = ModalService.modalOptions;
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {

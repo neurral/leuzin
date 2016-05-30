@@ -35,7 +35,7 @@ angular.module('authModule',[])
   function useCredentials(token) {
     // Set the token as header for your requests!
     // session.isAuthenticated = isAuthenticated;
-    console.log(session.token);
+    // console.log(session.token);
     $http.defaults.headers.common.Authorization = "Token token="+token;
     notifyObservers();
   }

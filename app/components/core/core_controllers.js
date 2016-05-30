@@ -57,7 +57,7 @@ angular.module('leuzin')
   
 }])
 
-.controller('LoginCtrl', function($scope, AuthService, $state, ModalService) {
+.controller('LoginCtrl', function($scope, AuthService, $state, ModalService, $rootScope) {
   $scope.user = {};  
 
   $scope.requestToken = function(){
@@ -78,8 +78,9 @@ angular.module('leuzin')
 
   $scope.login = function() {
     ModalService.showSpinner("Logging in...");
-    AuthService.login(JSON.stringify({ user: $scope.user })).then(function(msg) {
+    AuthService.login(JSON.stringify({ user: $scope.user })).then(function(userData) {
       // $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
+      $rootScope.user = userData;
       ModalService.flashSuccess('Login success!', false);
       $state.go('dashboard');
     }, function(errMsg) {
@@ -122,7 +123,7 @@ angular.module('leuzin')
   };
 })
 
-.controller('DashboardCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
+.controller('DashboardCtrl', function($rootScope,$scope, AuthService, API_ENDPOINT, $http, $state) {
   // $scope.getInfo = function() {
   //   $http.get(API_ENDPOINT.url + '/memberinfo').then(function(result) {
   //     $scope.memberinfo = result.data.msg;
