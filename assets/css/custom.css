@@ -13,7 +13,8 @@ a, a:hover, a:active, a:focus {
 }
 
 .panel-heading {
-	font-size: 1.50em;	
+	font-size: 1.50em;
+	text-shadow: 0px 1px 1px #fff;
 }
 
 /* button effect for links*/
@@ -25,38 +26,43 @@ a:active:not(.navbar-brand) {
 
 
 /* default screen, non-retina */
-body {
-	background-image: url('../../assets/images/bg/plane970@2x.jpg');
-    /*background-size: 100%;*/
-    /*background-size: auto 100%;*/
-    background-size: cover; /* fit bg to screen */
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+html {
+	background: url('../../assets/images/bg/plane970.jpg') no-repeat top center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; 
+
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../assets/images/bg/plane970@2x.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../assets/images/bg/plane970@2x.jpg', sizingMethod='scale')";
 }
 
+/*Adjust image quality*/
 @media only screen and (max-width: 320px) {
     /* Small screen, non-retina */
-    body { background-image: url("../../assets/images/bg/plane290.jpg"); }
-}
-@media
-only screen and (min-resolution: 2dppx) and (max-width: 320px) {
-    /* Small screen, retina */
-    body { background-image: url("../../assets/images/bg/plane538.jpg"); }
+    html { background-image: url("../../assets/images/bg/plane290.jpg"); }
 }
 @media only screen and (min-width: 321px) and (max-width: 538px) {
     /* Medium screen, non-retina */
-    body { background-image: url("../../assets/images/bg/plane538.jpg"); }
+    html { background-image: url("../../assets/images/bg/plane538.jpg"); }
+}
+@media
+	only screen and (min-resolution: 2dppx) and (max-width: 320px) {
+    /* Small screen, retina */
+    html { background-image: url("../../assets/images/bg/plane538.jpg"); }
 }
 @media
 only screen and (min-resolution: 2dppx) and (min-width: 321px) and (max-width: 538px) {
-    /* Medium screen, retina */
-    body { background-image: url("../../assets/images/bg/plane970.jpg"); }
+     /*Medium screen, retina */
+    html { background-image: url("../../assets/images/bg/plane970.jpg"); }
 }
 @media
-only screen and (min-resolution: 2dppx) and (min-width: 539px) {
+	only screen and (min-resolution: 2dppx) and (min-width: 539px) {
     /* Large screen, retina */
-    body { background-image: url("../../assets/images/bg/plane970@2x.jpg"); }
+    html { background-image: url("../../assets/images/bg/plane970@2x.jpg"); }
 }
+
+.container,body {background-color:transparent;}
 
 .container {
 	padding-bottom: 90px; /*fix hidden content gap below fixed nav*/
@@ -67,7 +73,11 @@ only screen and (min-resolution: 2dppx) and (min-width: 539px) {
 /* Background for Ui-View */
 .container > .ng-scope > .panel {
 	background: #fff;
-    background:rgba(255,255,255,0.8);
+    background:rgba(255,255,255,0.5);
+	-webkit-box-shadow:1px 1px 60px 50px rgba(150,150,150,0.6) inset;
+	-moz-box-shadow:1px 1px 60px 50px rgba(150,150,150,0.6) inset;
+	-o-box-shadow:1px 1px 60px 50px rgba(150,150,150,0.6) inset;
+    box-shadow:1px 1px 60px 50px rgba(150,150,150,0.6) inset;
 
 /*    filter:blur(4px);
     -o-filter:blur(4px);
@@ -81,11 +91,13 @@ only screen and (min-resolution: 2dppx) and (min-width: 539px) {
 
 #neurral-brand, .panel-heading, .input-group-addon {
 	font-family: 'Open Sans Condensed', 'Arial-Narrow', sans-serif;
+	font-weight: 700;
 }
 #neurral-brand {
 	text-shadow: 0 1px 5px #000,
 }
 #neurral-sub {
+	font-weight: normal;
 	font-variant: small-caps;
 	transition: all ease 0.3s;
 }
@@ -98,7 +110,6 @@ only screen and (min-resolution: 2dppx) and (min-width: 539px) {
 
 .navbar {
 	background-color: #111;
-	box-shadow:1px 1px 10px 25px #333 inset;
 	box-radius: 0px;
 }
 
