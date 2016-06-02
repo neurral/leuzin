@@ -99,7 +99,7 @@ angular.module('authModule',[])
       $http.post(API_ENDPOINT.url + '/in/'+session.username+"?token="+session.token).then(
         function(result) {
           if (result.status == 200) {
-            resolve(result);
+            resolve(result.data);
             storeUserCredentials(session);
           }
           else if (result.status == 409){

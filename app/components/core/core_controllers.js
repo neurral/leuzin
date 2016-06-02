@@ -26,37 +26,6 @@ angular.module('leuzin')
   };
 })
 
-.controller('TokenCtrl', ["$scope", "AuthService", "API_ENDPOINT", "$http", "$state", "$stateParams", "ModalService", "$timeout",
-  function($scope, AuthService, API_ENDPOINT, $http, $state, $stateParams, ModalService, $timeout) {
-  // console.log(JSON.stringify($stateParams));
-  $scope.message = '';
-
-  var loadNewToken = function(){
-    console.log("loading new token");
-    ModalService.showSpinner("Setting new token for " + $stateParams.username + "...");
-    //activate the new token to API so that it will have an expiry and can be used for log in later!
-    AuthService.activateNewToken($stateParams).then(
-      function(result){
-        // ModalService.flashSuccess("Login success!",true);    
-        // $state.go('dashboard');
-        ModalService.flashWithCB("Login success!",false, function(){$state.go('dashboard');});
-      },
-      function(result){
-        $scope.message = result[0];
-        // ModalService.flashFailure("Login failed: "+result, true); 
-        ModalService.flashWithCB("Login failed: "+result, true, function(){$state.go('login');});        
-      });
-  }
-
-  //listen to when the body directive has initialized
-  //use $watch instead of orig $on?
-  $scope.$watch('initialized', function() {
-    console.log("calling loadNewToken");
-    loadNewToken();
-  });
-  
-}])
-
 .controller('LoginCtrl', function($scope, AuthService, $state, ModalService, $rootScope) {
   $scope.user = {};  
 
@@ -68,6 +37,7 @@ angular.module('leuzin')
     else {
       AuthService.requestToken($scope.user).then(function(msg) {
       // $scope.syncSession(); //Since LoginCtrl is nested in AppCtrl, we can call the function from AppCtrl. 
+      // console.log("Yeah");
       ModalService.flashSuccess(msg,true);
     }, function(errMsg) {
       ModalService.flashFailure('Request failed: ' + errMsg,true);
@@ -88,6 +58,38 @@ angular.module('leuzin')
     });
   };
 })
+
+.controller('TokenCtrl', ["$rootScope","$scope", "AuthService", "API_ENDPOINT", "$http", "$state", "$stateParams", "ModalService", "$timeout",
+  function($rootScope, $scope, AuthService, API_ENDPOINT, $http, $state, $stateParams, ModalService, $timeout) {
+  // console.log(JSON.stringify($stateParams));
+  $scope.message = '';
+
+  var loadNewToken = function(){
+    // console.log("loading new token");
+    ModalService.showSpinner("Setting new token for " + $stateParams.username + "...");
+    //activate the new token to API so that it will have an expiry and can be used for log in later!
+    AuthService.activateNewToken($stateParams).then(
+      function(userData){
+        // ModalService.flashSuccess("Login success!",true);    
+        // $state.go('dashboard');
+        $rootScope.user = userData;
+        ModalService.flashWithCB("Access granted!",false, function(){$state.go('dashboard');});
+      },
+      function(result){
+        $scope.message = result[0];
+        // ModalService.flashFailure("Login failed: "+result, true); 
+        ModalService.flashWithCB("Login failed: "+result, true, function(){$state.go('login');});        
+      });
+  }
+
+  //listen to when the body directive has initialized
+  //use $watch instead of orig $on?
+  $scope.$watch('initialized', function() {
+    // console.log("calling loadNewToken");
+    loadNewToken();
+  });
+  
+}])
 
 .controller('RegisterCtrl', function($scope, AuthService, $state, ModalService) {
   $scope.user = {

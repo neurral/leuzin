@@ -1,6 +1,6 @@
 angular.module('leuzin')
 
-.service("ModalService",function($timeout){
+.service("ModalService",function($timeout,$window){
 	var observerCBs = [];
 	var registerObserverCallback = function(callback){
 		observerCBs.push(callback);
@@ -35,6 +35,7 @@ angular.module('leuzin')
 
   var showSpinner = function(msg){
     console.log("Show spinner: " + msg);
+    $window.document.activeElement.blur(); //remove focus from last clicked button
     flash(msg,0,false);
     // angular.element('#load').trigger('click');
     angular.element(document.querySelector('#load')).trigger('click');
@@ -54,7 +55,9 @@ angular.module('leuzin')
     modalOptions.loadingMessage =  msg ? msg : "Loading..."; 
         
     if (timeOut == 0 ){ 
-      if (isEnd) modalOptions.allowOk = true;
+      if (isEnd) {
+        modalOptions.allowOk = true;
+      }
     }
     else { 
       // console.log("Timing out! " + timeOut);
