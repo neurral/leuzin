@@ -1,0 +1,39 @@
+
+<!-- 
+  User: 
+        username,
+        first_name, 
+        mid_name, 
+        last_name,
+        email,
+        birthday,
+        cellphone_number,
+        telephone_number,
+        address,
+        date_start,
+        gender
+      -->
+
+      <div class="panel-body">
+        <!-- <form class="form" role="form" name="loginForm" ng-submit="login(user)" > -->
+        <form class="form" role="form" name="loginForm">
+          <div class="form-group">
+            <div class="col-sm-12 input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input type="text" class="form-control" id="username" placeholder="Username (Year+ID, e.g., 20130016)" ng-model="user.username" value="appCtrl.session.user" required>
+            </div>
+          </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- <button type="submit" class="btn btn-primary btn-block" ng-disabled="!user.username">Login</button> -->
+        <button type="submit" class="btn btn-primary btn-block" ng-click="login(user)" ng-disabled="!user.username">Login</button>
+      </div>
+      <div class="col-sm-6">
+        <button class="btn btn-default btn-block" ng-click="requestToken(user)" ng-disabled="!user.username">Request new token...</button>
+        <!--          <a href="#" class="btn btn-default btn-block" ng-click="requestToken(user)" ng-disabled="!user.username">Request new token...</a> -->
+      </div>
+    </div>
+  </form>
+
+</div>

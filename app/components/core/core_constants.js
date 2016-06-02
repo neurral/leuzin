@@ -9,7 +9,7 @@ angular.module("leuzin")
 	notAuthenticated: 'auth-not-authenticated'
 })
 .constant('API_ENDPOINT', {
-	url: 'https://neurral-nacc-0.herokuapp.com'
-	// url: 'http://localhost:3000'
+	// url: 'https://neurral-nacc-0.herokuapp.com'
+	url: 'http://localhost:3000'
 	// url: 'mock'
 })
