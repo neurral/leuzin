@@ -124,6 +124,10 @@
             if (next.name === 'login' || next.name === 'register') {
                 event.preventDefault(); //do not allow login or register if already logged in
             }
+            else if (next.name === 'index') {
+                event.preventDefault();
+                $state.go('dashboard'); 
+            }
         }
     });
 }]);
