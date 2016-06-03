@@ -13,55 +13,11 @@ angular.module('leuzin')
 
   //Should this be here in top-controller?
   $scope.logout = function() {
+    ModalService.showSpinner("Logging out...");
     AuthService.logout();
     $state.go('login');
+    ModalService.flashSuccess('Logged out!', false);
   };
-
-  //Lazy laoder for other component scripts
-  // $scope.loadJS = function(url) {
-  //   var type = 'text/javascript';
-  //   var charset = 'utf-8';
-  //   // if (url) {
-  //   //   var script = document.querySelector("script[src*='"+url+"']");
-  //   //   if (!script) {
-  //   //     var heads = document.getElementsByTagName("head");
-  //   //     if (heads && heads.length) {
-  //   //       var head = heads[0];
-  //   //       if (head) {
-  //   //         script = document.createElement('script');
-  //   //         script.setAttribute('src', url);
-  //   //         script.setAttribute('type', type);
-  //   //         if (charset) script.setAttribute('charset', charset);
-  //   //         head.appendChild(script);
-  //   //       }
-  //   //     }
-  //   //   }
-  //   //   return script;
-  //   // }
-
-  //   return $q(function(resolve, reject) {
-  //     if (url) {
-  //       var script = document.querySelector("script[src*='"+url+"']");
-  //       if (!script) {
-  //         var heads = document.getElementsByTagName("head");
-  //         if (heads && heads.length) {
-  //           var head = heads[0];
-  //           if (head) {
-  //             script = document.createElement('script');
-  //             script.setAttribute('src', url);
-  //             script.setAttribute('type', type);
-  //             if (charset) script.setAttribute('charset', charset);
-  //             head.appendChild(script);
-  //           }
-  //         }
-  //       }
-  //       resolve(script);
-  //     }
-  //     else {
-  //       reject();
-  //     }
-  //   });
-  // };
 
 })
 

@@ -118,6 +118,9 @@ footer {
     box-shadow:1px 1px 20px 10% rgba(200,200,200,0.5) inset;*/
 }
 
+.tab-content{
+	background-color: #fff;
+}
 /* Navbar Stuff */
 
 #neurral-brand, .panel-heading, .input-group-addon {

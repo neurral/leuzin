@@ -95,12 +95,16 @@
 
     }])
 
-  .run(['APP_PROPERTIES','$rootScope', '$state', 'AuthService', '$http', 'ModalService',
-    function (APP_PROPERTIES,$rootScope, $state, AuthService, $http, ModalService) {
+  .run(['APP_PROPERTIES','$rootScope', '$state', 'AuthService', '$http', 'ModalService','editableOptions','editableThemes',
+    function (APP_PROPERTIES,$rootScope, $state, AuthService, $http, ModalService, editableOptions,editableThemes) {
     // console.log(JSON.stringify($state.get()));
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.headers.common['Accept'] = 'application/json';
     $http.defaults.headers.common['Cache-Control'] = 'max-age=0, no-cache, no-store, must-revalidate';
+
+    editableThemes.bs3.inputClass = 'input-sm';
+    editableThemes.bs3.buttonsClass = 'btn-sm';
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 
     $rootScope.modalOptions = ModalService.modalOptions;
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
