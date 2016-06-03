@@ -75,15 +75,14 @@
                     controller: 'UserProfileCtrl', // This view will use UserProfileCtrl loaded below in the resolve
                     templateUrl: 'app/components/user/profile_module.html'
                 // }
-            ,
-            // },           
+            // }
+            ,           
             resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
                 userprofileLoad: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('UserModule');
                 }]
             }
         })
-
         ; 
 
         $urlRouterProvider.when('', '/index');

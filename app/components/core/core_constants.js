@@ -13,3 +13,10 @@ angular.module("leuzin")
 	// url: 'http://localhost:3000'
 	// url: 'mock'
 })
+
+/* mappings for modules available in neurral */
+// .constant('MODULES', {
+	
+// })
+
+;
