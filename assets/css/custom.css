@@ -12,10 +12,6 @@ a, a:hover, a:active, a:focus {
 	outline: 0;
 }
 
-.panel-heading {
-	font-size: 1.50em;
-	/*text-shadow: 0px 1px 1px #fff;*/
-}
 
 
 /* button effect for links*/
@@ -70,7 +66,7 @@ only screen and (min-resolution: 2dppx) and (min-width: 321px) and (max-width: 5
 .container, body {background-color:transparent;}
 
 body {
-	margin-bottom: 50px; /* must equal footer height */
+	margin-bottom: 30px; /* must equal footer height */
 }
 .container {
 	/*padding-bottom: 90px; fix hidden content gap below fixed nav*/
@@ -87,7 +83,7 @@ body {
 footer {
 	background-color: #111;
 	width: 100%;
-	height: 50px;  /* must equal body margin bottom */
+	height: 30px;  /* must equal body margin bottom */
 	position:absolute;
 	bottom: 0;
 }
@@ -121,6 +117,18 @@ footer {
 .tab-content{
 	background-color: #fff;
 }
+
+
+.panel-heading h3 {
+	font-size: 1.50em;
+	/*text-shadow: 0px 1px 1px #fff;*/
+}
+
+.panel-heading, .panel-body{
+	padding: 10px;
+}
+
+
 /* Navbar Stuff */
 
 #neurral-brand, .panel-heading, .input-group-addon {
@@ -153,8 +161,8 @@ footer {
 
 /* Spinning Loader */
 .glyphicon.spinning {
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
+    animation: spin 0.5s infinite linear;
+    -webkit-animation: spin 0.5s infinite linear;
 }
 
 @keyframes spin {

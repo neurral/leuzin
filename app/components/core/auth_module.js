@@ -1,6 +1,6 @@
 angular.module('authModule',[])
 .service("AuthService",["$q", "$http", "API_ENDPOINT", function($q, $http, API_ENDPOINT){
-  var KEY_SESSION = 'local_session';  //should we use the token key or..this 'lcoal_session' will cause one session per browser only
+  var KEY_SESSION = 'neurral_session';  //should we use the token key or..this 'lcoal_session' will cause one session per browser only
   var session = {};
 
 
@@ -43,7 +43,7 @@ angular.module('authModule',[])
   function destroyUserCredentials() {
     session = undefined;
     $http.defaults.headers.common.Authorization = undefined;
-    // window.localStorage.removeItem(KEY_SESSION);
+    window.localStorage.removeItem(KEY_SESSION);
     notifyObservers();
   }
  
@@ -122,8 +122,9 @@ angular.module('authModule',[])
     });
   }
 
-  var logout = function() {
+  var logout = function(user) {
     // TODO : add ajax call for session delete in API
+    $http.post(API_ENDPOINT.url + '/logout', user); //TODO : add promise resolution?
     destroyUserCredentials();
   };
  

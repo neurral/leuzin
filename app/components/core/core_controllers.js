@@ -14,7 +14,7 @@ angular.module('leuzin')
   //Should this be here in top-controller?
   $scope.logout = function() {
     ModalService.showSpinner("Logging out...");
-    AuthService.logout();
+    AuthService.logout(JSON.stringify({ user: $scope.user }));
     $state.go('login');
     ModalService.flashSuccess('Logged out!', false);
   };
@@ -122,22 +122,6 @@ angular.module('leuzin')
 
 .controller('DashboardCtrl', function($rootScope,$scope, AuthService, API_ENDPOINT, $http, $state, $ocLazyLoad) {
 
-//Test loading a profile
-  // var loadProfile = function(){
-  //   console.log('Loading profile.js');
-  //   $scope.$parent.loadJS('app/components/user/profile_modulse.js', 'text/javascript', 'utf-8')
-  //   .then(function(script){
-  //     console.log('Loaded js!');
-  //   });
-  // }
-
-  // loadProfile();
-  // $ocLazyLoad.load('UserModule');
-  //     // Example of ocLoader event, use this somewhere e.g.g controller 
-  //   // ocLazyLoad.moduleLoaded, ocLazyLoad.moduleReloaded, ocLazyLoad.componentLoaded, ocLazyLoad.fileLoaded
-  //   $scope.$on('ocLazyLoad.moduleLoaded', function(e, module) {
-  //     console.log('module loaded', module);
-  //   });
 
 })
 ;

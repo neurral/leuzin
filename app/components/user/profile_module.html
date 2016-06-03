@@ -26,35 +26,35 @@
   
   <table class="table">
     <tr>
-      <td class="col-md-1"><p><b>First Name: </b></p></td>
+      <td class="col-md-1"><p><b>First Name</b></p></td>
       <td><a href="#" editable-text="user.first_name">{{ user.first_name || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Middle Name: </b></p></td>
+      <td class="col-md-1"><p><b>Middle Name</b></p></td>
       <td><a href="#" editable-text="user.mid_name">{{ user.mid_name || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Last Name: </b></p></td>
+      <td class="col-md-1"><p><b>Last Name</b></p></td>
       <td><a href="#" editable-text="user.last_name">{{ user.last_name || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Birthday: </b></p></td>
+      <td class="col-md-1"><p><b>Birthday</b></p></td>
       <td><a href="#" editable-bsdate="user.birthday" buttons="no" e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="yyyy-MM-dd">{{ (user.birthday | date:"dd/MM/yyyy") || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Gender: </b></p></td>
+      <td class="col-md-1"><p><b>Gender</b></p></td>
       <td><a href="#" editable-text="user.gender">{{ user.gender || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Cellphone Number: </b></p></td>
+      <td class="col-md-1"><p><b>Cellphone Number</b></p></td>
       <td> <a href="#" editable-text="user.cellphone_number" e-pattern="\d{2}\-\d{3}\-\d{7}" e-title="63-917-1234567">{{ user.cellphone_number || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Telephone Number: </b></p></td>
+      <td class="col-md-1"><p><b>Telephone Number</b></p></td>
       <td> <a href="#" editable-tel="user.telephone_number" e-pattern="\d{2}\-\d{1}\-\d{7}" e-title="63-2-1234567">{{ user.telephone_number || 'empty' }}</a></td>
     </tr>
     <tr>
-      <td class="col-md-1"><p><b>Address: </b></p></td>
+      <td class="col-md-1"><p><b>Address</b></p></td>
       <td><a href="#" editable-textarea="user.address" e-rows="3" e-cols="40"><pre>{{ user.address || 'empty' }}</pre></a></td>
     </tr>
   </table>

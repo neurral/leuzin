@@ -5,9 +5,6 @@
 */
 
     var app = angular.module("leuzin", [
-    // 'ngRoute',
-    // 'sessionModule',
-    // 'loginModule',
     'ui.router',
     'ui.bootstrap',
     'xeditable',
@@ -24,7 +21,7 @@
                     name: 'UserModule',
                     files: ['app/components/user/profile_module.js']
                 }
-                // {} another module, dont forget comma spearator
+                // {} another module, dont forget comma separator
             ]
         });
     }])
