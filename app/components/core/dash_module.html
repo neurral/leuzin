@@ -1,18 +1,16 @@
-<div class="glass panel">
+<div class="panel">
   <div class="panel-heading">
-    <h3>{{user.first_name}} {{user.last_name}} <span class="label label-primary">{{user.username}} </span></h3>
+    <h3><span class="label label-default">{{user.username}} </span></h3>
   </div>
- 
   <div class="panel-body">
-    User info 
-    <br>
-    {{user}}
 
-<br>
+    <ul class="nav nav-tabs">
+      <li><a href="#" ui-sref="dashboard.profile">Profile</a></li>
+      <li><a href="#">Modules</a></li>
+      <li><a href="#">Transactions</a></li>
+    </ul>
 
-  <!-- <userprofile></userprofile> -->
-
-
+    <div ui-view="userprofile"></div>
   </div>
 
 </div>

@@ -17,4 +17,11 @@ angular.module('leuzin')
 			});
 		}*/
   	};
-});
+})
+
+.controller("UserProfileCtrl", function(){
+	
+})
+;
+
+console.log('profile_module.js here!');

@@ -2,7 +2,7 @@
 /**
 	Start the Angular App definition.
 	List the injections separated by comma
-    */
+*/
 
     var app = angular.module("leuzin", [
     // 'ngRoute',
@@ -11,29 +11,41 @@
     'ui.router',
     'ui.bootstrap',
     'xeditable',
+    'oc.lazyLoad',
     'authModule'
     ])
-    //  For a simulator use: url: 'http://127.0.0.1:8080/api'
-    // url: 'https://neurral-nacc-0.herokuapp.com/'
-    // url: 'http://localhost:3000'
 
-  .config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-        // $locationProvider.html5Mode(true);
-        // $locationProvider.html5Mode({
-        //   enabled: true,
-        //   requireBase: false
-        // });
+    .config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+        $ocLazyLoadProvider.config({
+            // debug: true,
+            events: true,
+            modules: [
+                {
+                    name: 'UserModule',
+                    files: ['app/components/user/profile_module.js']
+                }
+                // {} another module, dont forget comma spearator
+            ]
+        });
+    }])
+    // Example of ocLoader event, use this somewhere e.g.g controller 
+    // ocLazyLoad.moduleLoaded, ocLazyLoad.moduleReloaded, ocLazyLoad.componentLoaded, ocLazyLoad.fileLoaded
+    // $scope.$on('ocLazyLoad.moduleLoaded', function(e, module) {
+    //   console.log('module loaded', module);
+    // });
 
-        // $urlRouterProvider.when('', '/');
-        // otherwise report 404
-        // 
-
+    .config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
         $stateProvider
         .state('index', {
             url: '/index',
             // abstract: true,
             templateUrl: 'app/components/core/views/home.html',
             data: { title: 'Home' }
+        })
+        .state('404', {
+            url: '/404',
+            templateUrl: 'app/components/core/views/404.html',
+            data: { title: 'Not Found' }
         })
         .state('login', {
             url: '/login',
@@ -47,32 +59,40 @@
             controller: 'RegisterCtrl',
             data: { title: 'Register' }
         })
-        .state('dashboard', {
-            url: '/dashboard',
-            templateUrl: 'app/components/core/dash_module.html',
-            controller: 'DashboardCtrl',
-            data: { title: 'Dashboard' }
-        })
         .state('activate_token', {
             url: "/in/:username?token",
             templateUrl: 'app/components/core/token_module.html',
             controller: 'TokenCtrl',
             data: { title: 'Activate Link' }
         })
-        .state('404', {
-            url: '/404',
-            templateUrl: 'app/components/core/views/404.html',
-            data: { title: 'Not Found' }
-        }); 
+        .state('dashboard', {
+            url: '/dashboard',
+            templateUrl: 'app/components/core/dash_module.html',
+            controller: 'DashboardCtrl',
+            data: { title: 'Dashboard' }
+        })
+        .state('dashboard.profile', {
+            url: "/profile",
+            views: {
+                "userprofile": {
+                    controller: 'UserProfileCtrl', // This view will use AppCtrl loaded below in the resolve
+                    templateUrl: 'app/components/user/profile_module.html'
+                }
+            },           
+            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                userprofileLoad: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load('UserModule');
+                }]
+            }
+        })
 
-        //when no states the href, go to dashboard. isAuthenticated will be checked in $stateChangeStart
-        //and will redirect to login if not logged in.
+        ; 
+
         $urlRouterProvider.when('', '/index');
         //everything else, 404
         $urlRouterProvider.otherwise('/404');
 
     }])
-
 
   .run(['APP_PROPERTIES','$rootScope', '$state', 'AuthService', '$http', 'ModalService',
     function (APP_PROPERTIES,$rootScope, $state, AuthService, $http, ModalService) {

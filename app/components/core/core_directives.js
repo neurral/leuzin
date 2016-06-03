@@ -8,7 +8,7 @@ angular.module('leuzin')
 			var listener = $scope.$watch(function() {
 				clearTimeout(to);
 				to = setTimeout(function () {
-					console.log('AngularApp: initialized');
+					console.log('Leuzin: initialized');
 					listener();
 					$rootScope.$broadcast('initialized'); //TODO should I $emit this shit?
 				}, 500);

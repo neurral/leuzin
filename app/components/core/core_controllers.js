@@ -1,7 +1,7 @@
 angular.module('leuzin')
 
 
-.controller('AppCtrl', function($rootScope,$scope, AuthService, $state, $timeout, ModalService){
+.controller('AppCtrl', function($rootScope,$scope, AuthService, $state, $timeout, ModalService, $q){
   /* Synchronizers to $scope */
   ModalService.registerObserverCallback(function(){
     $rootScope.modalOptions = ModalService.modalOptions;
@@ -10,20 +10,59 @@ angular.module('leuzin')
   AuthService.registerObserverCallback(function(){
       $rootScope.session = AuthService.sessionInfo(); 
   });
-  
-  // $scope.syncSession = function(){
-      //lets add the session info to the AppCtrl Scope, which is accessible to all controllers
-      //we need these $scope vars because we needed variables for ng-if in view. We cant use AuthService for that.
-      // $scope.session = AuthService.sessionInfo();
-      // $scope.session.isAuthenticated = AuthService.isAuthenticated();
-  // }
 
-  //Should this be here?
+  //Should this be here in top-controller?
   $scope.logout = function() {
     AuthService.logout();
-    // $scope.syncSession();
     $state.go('login');
   };
+
+  //Lazy laoder for other component scripts
+  // $scope.loadJS = function(url) {
+  //   var type = 'text/javascript';
+  //   var charset = 'utf-8';
+  //   // if (url) {
+  //   //   var script = document.querySelector("script[src*='"+url+"']");
+  //   //   if (!script) {
+  //   //     var heads = document.getElementsByTagName("head");
+  //   //     if (heads && heads.length) {
+  //   //       var head = heads[0];
+  //   //       if (head) {
+  //   //         script = document.createElement('script');
+  //   //         script.setAttribute('src', url);
+  //   //         script.setAttribute('type', type);
+  //   //         if (charset) script.setAttribute('charset', charset);
+  //   //         head.appendChild(script);
+  //   //       }
+  //   //     }
+  //   //   }
+  //   //   return script;
+  //   // }
+
+  //   return $q(function(resolve, reject) {
+  //     if (url) {
+  //       var script = document.querySelector("script[src*='"+url+"']");
+  //       if (!script) {
+  //         var heads = document.getElementsByTagName("head");
+  //         if (heads && heads.length) {
+  //           var head = heads[0];
+  //           if (head) {
+  //             script = document.createElement('script');
+  //             script.setAttribute('src', url);
+  //             script.setAttribute('type', type);
+  //             if (charset) script.setAttribute('charset', charset);
+  //             head.appendChild(script);
+  //           }
+  //         }
+  //       }
+  //       resolve(script);
+  //     }
+  //     else {
+  //       reject();
+  //     }
+  //   });
+  // };
+
 })
 
 .controller('LoginCtrl', function($scope, AuthService, $state, ModalService, $rootScope) {
@@ -125,13 +164,24 @@ angular.module('leuzin')
   };
 })
 
-.controller('DashboardCtrl', function($rootScope,$scope, AuthService, API_ENDPOINT, $http, $state) {
-  // $scope.getInfo = function() {
-  //   $http.get(API_ENDPOINT.url + '/memberinfo').then(function(result) {
-  //     $scope.memberinfo = result.data.msg;
+.controller('DashboardCtrl', function($rootScope,$scope, AuthService, API_ENDPOINT, $http, $state, $ocLazyLoad) {
+
+//Test loading a profile
+  // var loadProfile = function(){
+  //   console.log('Loading profile.js');
+  //   $scope.$parent.loadJS('app/components/user/profile_modulse.js', 'text/javascript', 'utf-8')
+  //   .then(function(script){
+  //     console.log('Loaded js!');
   //   });
-  // };
-  // $scope.syncSession();
+  // }
+
+  // loadProfile();
+  // $ocLazyLoad.load('UserModule');
+  //     // Example of ocLoader event, use this somewhere e.g.g controller 
+  //   // ocLazyLoad.moduleLoaded, ocLazyLoad.moduleReloaded, ocLazyLoad.componentLoaded, ocLazyLoad.fileLoaded
+  //   $scope.$on('ocLazyLoad.moduleLoaded', function(e, module) {
+  //     console.log('module loaded', module);
+  //   });
 
 })
 ;
