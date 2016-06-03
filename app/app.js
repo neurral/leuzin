@@ -73,12 +73,13 @@
         })
         .state('dashboard.profile', {
             url: "/profile",
-            views: {
-                "userprofile": {
-                    controller: 'UserProfileCtrl', // This view will use AppCtrl loaded below in the resolve
+            // views: {
+            //     "userprofile": {
+                    controller: 'UserProfileCtrl', // This view will use UserProfileCtrl loaded below in the resolve
                     templateUrl: 'app/components/user/profile_module.html'
-                }
-            },           
+                // }
+            ,
+            // },           
             resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
                 userprofileLoad: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('UserModule');
