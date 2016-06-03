@@ -91,8 +91,9 @@
 
     }])
 
-  .run(['APP_PROPERTIES','$rootScope', '$state', 'AuthService', '$http', 'ModalService','editableOptions','editableThemes',
-    function (APP_PROPERTIES,$rootScope, $state, AuthService, $http, ModalService, editableOptions,editableThemes) {
+  .run(['APP_PROPERTIES','$rootScope', '$state', 'AuthService', '$http', 'ModalService', '$ocLazyLoad', 'editableOptions','editableThemes',
+    function (APP_PROPERTIES,$rootScope, $state, AuthService, $http, ModalService, $ocLazyLoad, editableOptions,editableThemes) {
+
     // console.log(JSON.stringify($state.get()));
     $http.defaults.headers.common['Content-Type'] = 'application/json';
     $http.defaults.headers.common['Accept'] = 'application/json';
