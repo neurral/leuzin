@@ -86,6 +86,7 @@ footer {
 	height: 30px;  /* must equal body margin bottom */
 	position:absolute;
 	bottom: 0;
+	color: gray;
 }
 
 /* Background for Ui-View */

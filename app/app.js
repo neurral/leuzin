@@ -105,7 +105,7 @@
 
     $rootScope.modalOptions = ModalService.modalOptions;
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
-        console.log(next.name);
+        console.log('[Route] ' + next.name);
         // console.log('RS:' +$rootScope.session + "AUTH'd: "+ JSON.stringify(AuthService.sessionInfo()));
         // console.log(JSON.stringify("StateParams: " + nextParams));
         
