@@ -154,6 +154,7 @@ function($rootScope,$scope, AuthService, $state, $timeout, ModalService, $q){
 		$rootScope.session = AuthService.sessionInfo(); 
 	});
 	//Logout is in top controller so that it can be called from the navbar 
+
 	$scope.logout = function() {
 		ModalService.showSpinner("Logging out...");
 		AuthService.logout(JSON.stringify({ user: $scope.user }));

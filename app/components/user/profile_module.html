@@ -17,6 +17,8 @@ gender
 <div class="panel-body">
 <div>
 	<p>
+		<!-- <img src="data:image/jpeg;base64, {{user.photo}}" /> -->
+		
 		<b>Username: </b> {{user.username}}<br />
 		<b>Email: </b> {{user.email}}<br />
 		<b>Date Started: </b> {{user.date_start}}<br />
@@ -81,19 +83,7 @@ gender
 			</span>
 	</div>
 </form>
-<!--   <div>Email: <span  editable-email="user.email">{{ user.email || 'empty' }}</span></div>
-<div>Tel: <span  editable-tel="user.tel" e-pattern="\d{3}\-\d{2}\-\d{2}" e-title="xxx-xx-xx">{{ user.tel || 'empty' }}</span></div>
-<div>Number: <span  editable-number="user.number" e-min="18">{{ user.number || 'empty' }}</span></div>  
-<div>Range: <span  editable-range="user.range" e-step="5">{{ user.range || 'empty' }}</span></div>  
-<div>Url: <span  editable-url="user.url">{{ user.url || 'empty' }}</span></div>  
-<div>Search: <span  editable-search="user.search">{{ user.search || 'empty' }}</span></div>  
-<div>Color: <span  editable-color="user.color">{{ user.color || 'empty' }}</span></div>  
-<div>Date: <span  editable-date="user.date">{{ (user.date | date: "yyyy-MM-dd") || 'empty' }}</span></div>
-<div>Time: <span  editable-time="user.time">{{ (user.time | date: "HH:mm") || 'empty' }}</span></div>
-<div>Datetime: <span  editable-datetime="user.datetime">{{ user.datetime || 'empty' }}</span></div>  
-<div>Month: <span  editable-month="user.month">{{ (user.month | date: "yyyy-MM") || 'empty' }}</span></div>
-<div>Week: <span  editable-week="user.week">{{ (user.week | date: "yyyy-Www") || 'empty'}}</span></div>
-<div>Password: <span  editable-password="user.password">{{ user.password || 'empty' }}</span></div> -->
+
 </div>
 
 </div>

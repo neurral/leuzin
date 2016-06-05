@@ -71,14 +71,8 @@
         .state('dashboard.profile', {
             url: "/profile",
             data: { title: 'Profile' },
-            // views: {
-            //     "userprofile": {
-                    controller: 'UserProfileCtrl', // This view will use UserProfileCtrl loaded below in the resolve
-                    templateUrl: 'app/components/user/profile_module.html'
-
-                // }
-            // }
-            ,           
+            controller: 'UserProfileCtrl', // This view will use UserProfileCtrl loaded below in the resolve
+            templateUrl: 'app/components/user/profile_module.html',           
             resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
                 userprofileLoad: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load('UserModule');
@@ -104,6 +98,9 @@
     editableThemes.bs3.inputClass = 'input-sm';
     editableThemes.bs3.buttonsClass = 'btn-sm';
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+
+    /* Auto load session ? */
+    // $rootScope.session = AuthService.autoLoadSession();
 
     $rootScope.modalOptions = ModalService.modalOptions;
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {

@@ -132,7 +132,7 @@ angular.module('authModule',[])
 		requestToken: requestToken,
 		activateNewToken: activateToken,
 		isAuthenticated: function() {return (session && session.isAuthenticated);},
-		sessionInfo: function() {return session;} 
+		sessionInfo: function() {return session;}
 	};
 }])
 

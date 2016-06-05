@@ -71,12 +71,10 @@
 					</button>
 					<a class="navbar-brand" id="neurral-brand" href="/" ui-sref="index">neurral \\\ <span  id="neurral-sub">leuzin</span></a>
 				</div>
-				<div class="collapse navbar-collapse" id="myNavbar" ng-switch on="session.isAuthenticated">
-					<ul class="nav navbar-nav">
-						<li ng-switch-when="true"><a href="#" ui-sref="dashboard">Dashboard</a></li>
-						<!-- <li><a href="#">Page 1</a></li> -->
-						<!-- <li><a href="#">Page 2</a></li> -->
-						<!-- <li><a href="#">Page 3</a></li> -->
+				<div class="collapse navbar-collapse" id="myNavbar" ng-switch on="session && session.isAuthenticated">
+					<ul class="nav navbar-nav" ng-switch-when="true">
+						<li><a href="#" ui-sref="dashboard">Dashboard</a></li>
+						<li><a href="#" ui-sref="dashboard.profile">Profile</a></li>
 					</ul>
 					<!-- Menu when not logged in -->
 					<ul class="nav navbar-nav navbar-right" id="outside-menu1" ng-switch-default>

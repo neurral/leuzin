@@ -70,9 +70,10 @@ body {
 }
 .container {
 	/*padding-bottom: 90px; fix hidden content gap below fixed nav*/
-	padding-right:10px; 
-	padding-left:10px;
+	/*padding-right:10px; */
+	/*padding-left:10px;*/
 	min-height: 100%;
+	min-width: 100%;
 	color: #000;
 }
 
