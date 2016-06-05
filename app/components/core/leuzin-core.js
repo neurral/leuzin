@@ -9,14 +9,13 @@ angular.module("leuzin")
 	auth_events: {
 		notAuthenticated: 'auth-not-authenticated'
 	},
-	// api:  'https://neurral-nacc-0.herokuapp.com'
-	api: 'http://localhost:3000'
+	api:  'https://neurral-nacc-0.herokuapp.com'
+	// api: 'http://localhost:3000'
 	// api: 'mock'
 })
 
 /* mappings for modules available in neurral */
 // .constant('MODULES', {
-	
 // })
 
 
@@ -44,7 +43,7 @@ function($timeout,$window){
 		icon: 'glyphicon-refresh spinning'
 	};
 
-		var showSpinner = function(msg){
+	var showSpinner = function(msg){
 		$window.document.activeElement.blur(); //remove focus from last clicked button
 		flash(msg,0,false);
 		// angular.element('#load').trigger('click');

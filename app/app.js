@@ -70,10 +70,12 @@
         })
         .state('dashboard.profile', {
             url: "/profile",
+            data: { title: 'Profile' },
             // views: {
             //     "userprofile": {
                     controller: 'UserProfileCtrl', // This view will use UserProfileCtrl loaded below in the resolve
                     templateUrl: 'app/components/user/profile_module.html'
+
                 // }
             // }
             ,           
